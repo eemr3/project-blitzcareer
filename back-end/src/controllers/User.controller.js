@@ -7,6 +7,13 @@ const createNewUser = async (req, res) => {
   return res.status(201).json(user);
 };
 
+const getAllUsers = async (req, res) => {
+  const users = await UserService.getAllUsers();
+
+  return res.status(200).json(users);
+};
+
 module.exports = {
   createNewUser,
+  getAllUsers,
 };
