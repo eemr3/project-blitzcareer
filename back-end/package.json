@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "nodemon src/api/server.js",
     "start": "node src/api/server.js",
-    "test": "mocha src/test/**/*$NAME*.test.js --exit",
-    "test:coverage": "nyc mocha --all --include models --include services --include controllers src/test/**/*.test.js --exit"
+    "test": "mocha src/tests/**/*$NAME*.test.js --exit",
+    "test:coverage": "nyc mocha --all --include models --include services --include controllers src/tests/**/*.test.js --exit"
   },
   "keywords": [],
   "author": "Emerson Moreira",
