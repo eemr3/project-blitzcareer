@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 const { expect } = chai;
 const { User } = require('../../database/models');
 const app = require('../../api/app');
-const { createUserMock } = require('../mocks/User');
+const { createUserMock, findAllUserMOck } = require('../mocks/User');
 
 describe('User', () => {
   describe('rota "/users"', () => {
@@ -33,6 +33,22 @@ describe('User', () => {
         expect(chaiHttpResponse.body).to.have.property('email');
         expect(chaiHttpResponse.body).to.have.property('password');
       });
+    });
+  });
+
+  describe('metodo "GET"', () => {
+    before(() => {
+      sinon.stub(User, 'findAll').resolves(findAllUserMOck);
+    });
+
+    after(() => {
+      User.findAll.restore();
+    });
+
+    it('busca todos os usuários cadastrados', async () => {
+      chaiHttpResponse = await await chai.request(app).get('/users');
+
+      expect(chaiHttpResponse.status).to.be.equal(200);
     });
   });
 });
