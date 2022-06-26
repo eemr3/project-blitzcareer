@@ -8,7 +8,11 @@ chai.use(chaiHttp);
 const { expect } = chai;
 const { User } = require('../../database/models');
 const app = require('../../api/app');
-const { createUserMock, findAllUserMOck } = require('../mocks/User');
+const {
+  createUserMock,
+  findAllUserMOck,
+  findOneUserMock,
+} = require('../mocks/User');
 
 describe('User', () => {
   describe('rota "/users"', () => {
@@ -37,18 +41,47 @@ describe('User', () => {
   });
 
   describe('metodo "GET"', () => {
-    before(() => {
-      sinon.stub(User, 'findAll').resolves(findAllUserMOck);
+    describe('rota "/users"', () => {
+      before(() => {
+        sinon.stub(User, 'findAll').resolves(findAllUserMOck);
+      });
+
+      after(() => {
+        User.findAll.restore();
+      });
+
+      it('busca todos os usuários cadastrados', async () => {
+        chaiHttpResponse = await chai.request(app).get('/users');
+
+        expect(chaiHttpResponse.status).to.be.equal(200);
+        for (let index = 0; index < findAllUserMOck.length; index += 1) {
+          expect(chaiHttpResponse.body[index]).to.have.property('id');
+          expect(chaiHttpResponse.body[index]).to.have.property('name');
+          expect(chaiHttpResponse.body[index]).to.have.property('email');
+          expect(chaiHttpResponse.body[index]).to.not.have.property('password');
+        }
+      });
     });
 
-    after(() => {
-      User.findAll.restore();
-    });
+    describe('rota "/users/:id"', () => {
+      before(() => {
+        sinon.stub(User, 'findOne').resolves(findOneUserMock);
+      });
 
-    it('busca todos os usuários cadastrados', async () => {
-      chaiHttpResponse = await await chai.request(app).get('/users');
+      after(() => {
+        User.findOne.restore();
+      });
 
-      expect(chaiHttpResponse.status).to.be.equal(200);
+      it('busca todos os usuários cadastrados', async () => {
+        chaiHttpResponse = await chai.request(app).get('/users/1');
+
+        expect(chaiHttpResponse.status).to.be.equal(200);
+
+        expect(chaiHttpResponse.body).to.have.property('id');
+        expect(chaiHttpResponse.body).to.have.property('name');
+        expect(chaiHttpResponse.body).to.have.property('email');
+        expect(chaiHttpResponse.body).to.not.have.property('password');
+      });
     });
   });
 });
