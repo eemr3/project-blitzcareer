@@ -6,18 +6,25 @@ const createUserMock = {
 
 const findAllUserMOck = [
   {
+    id: 1,
     name: 'Emerson',
     email: 'email@test.com',
-    password: '123456',
   },
   {
+    id: 2,
     name: 'Pedro',
     email: 'pedro@test.com',
-    password: '123456',
   },
 ];
+
+const findOneUserMock = {
+  id: 1,
+  name: 'Emerson',
+  email: 'email@test.com',
+};
 
 module.exports = {
   createUserMock,
   findAllUserMOck,
+  findOneUserMock,
 };
