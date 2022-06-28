@@ -5,16 +5,19 @@
   "main": "src/server.js",
   "scripts": {
     "dev": "nodemon src/api/server.js",
-    "restore": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate",
+    "restore": "cross-env NODE_ENV=development npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "start": "node src/api/server.js",
-    "test": "mocha src/tests/**/*$NAME*.test.js --exit",
-    "test:coverage": "nyc mocha --all --include models --include services --include controllers src/tests/**/*.test.js --exit",
+    "pretest": "cross-env NODE_ENV=test npx sequelize-cli db:create && cross-env NODE_ENV=test npx sequelize-cli db:migrate",
+    "test": "cross-env NODE_ENV=test mocha src/tests/**/*$NAME*.test.js --exit",
+    "test:coverage": "npm run pretest && cross-env NODE_ENV=test nyc mocha src/tests/**/*.test.js --exit",
+    "posttest": "cross-env NODE_ENV=test npx sequelize-cli db:migrate:undo:all",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
   "keywords": [],
   "author": "Emerson Moreira",
   "license": "ISC",
   "dependencies": {
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",
     "eslint-config-trybe-backend": "1.0.3",
     "express": "^4.18.1",
