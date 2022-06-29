@@ -19,7 +19,7 @@ describe('Login', () => {
         .request(app)
         .post('/login')
         .send(loginUserMock);
-      console.log(chaiHttpResponse.body);
+
       expect(chaiHttpResponse.status).to.be.equal(200);
       expect(chaiHttpResponse.body).to.have.property('token');
     });

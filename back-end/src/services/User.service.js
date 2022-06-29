@@ -1,6 +1,6 @@
 const bcryt = require('bcryptjs');
 const { createToken } = require('../auth/authToken');
-const { User } = require('../database/models');
+const { User, ToDo } = require('../database/models');
 
 const createNewUser = async (nameUser, emailUser, pwdUser) => {
   const pwd = await bcryt.hash(pwdUser, 10);
@@ -23,6 +23,7 @@ const getAllUsers = async () => {
 const getByIdUser = async (id) => {
   const user = await User.findOne({
     where: id,
+    include: [{ model: ToDo, as: 'toDos' }],
     attributes: { exclude: ['password'] },
   });
 
