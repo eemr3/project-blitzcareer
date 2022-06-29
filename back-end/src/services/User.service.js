@@ -1,7 +1,15 @@
+const bcryt = require('bcryptjs');
+const { createToken } = require('../auth/authToken');
 const { User } = require('../database/models');
 
-const createNewUser = async (name, email, password) => {
-  const user = await User.create({ name, email, password });
+const createNewUser = async (nameUser, emailUser, pwdUser) => {
+  const pwd = await bcryt.hash(pwdUser, 10);
+
+  const user = await User.create({
+    name: nameUser,
+    email: emailUser,
+    password: pwd,
+  });
 
   return user;
 };
