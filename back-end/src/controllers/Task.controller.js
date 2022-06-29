@@ -14,7 +14,19 @@ const getAllTasks = async (_req, res) => {
   return res.status(200).json(tasks);
 };
 
+const getTaskById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const task = await TaskService.getTaskById(Number(id));
+
+    return res.status(200).json(task);
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createTask,
   getAllTasks,
+  getTaskById,
 };
