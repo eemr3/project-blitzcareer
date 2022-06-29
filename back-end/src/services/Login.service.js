@@ -6,7 +6,7 @@ const loginUser = async (emailUser, pwdUser) => {
   const user = await User.findOne({
     where: { email: emailUser },
   });
-  console.log(user);
+
   const pwdDecripted = await bcrpt.compare(pwdUser, user.password);
 
   if (!pwdDecripted || null) {
