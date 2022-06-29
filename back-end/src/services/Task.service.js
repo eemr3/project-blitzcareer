@@ -38,9 +38,24 @@ const updateTask = async ({ title, description, status, id }) => {
   return task;
 };
 
+const destroyTask = async (id) => {
+  const taskExist = await getTaskById(id);
+  if (!taskExist) {
+    throw new Error('Task not found');
+  }
+
+  const deleteTask = await ToDo.destroy({ where: { id } });
+  if (deleteTask === 0) {
+    throw new Error('Error deleted task');
+  }
+
+  return { message: 'Task deleted successfully' };
+};
+
 module.exports = {
   createTask,
   getAllTasks,
   getTaskById,
   updateTask,
+  destroyTask,
 };
