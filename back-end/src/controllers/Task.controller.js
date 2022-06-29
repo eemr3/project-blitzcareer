@@ -43,9 +43,21 @@ const updateTask = async (req, res) => {
   }
 };
 
+const destroyTask = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await TaskService.destroyTask(Number(id));
+
+    res.status(200).json(result);
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createTask,
   getAllTasks,
   getTaskById,
   updateTask,
+  destroyTask,
 };
