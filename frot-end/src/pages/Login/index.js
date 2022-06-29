@@ -1,13 +1,11 @@
 import React from 'react';
-
-// import { Container } from './styles';
+import { Link } from 'react-router-dom';
+import Header from '../../components/Header';
 
 function Login() {
   return (
     <div>
-      <div>
-        <h1>Lista de tarefas - Ebytr</h1>
-      </div>
+      <Header />
       <div>
         <input type='text' placeholder='E-mail' />
         <input type='text' placeholder='Password' />
@@ -15,7 +13,7 @@ function Login() {
       </div>
       <div>
         <p>Não tem uma conta?</p>
-        <a href='#/'>Crie agora</a>
+        <Link to='/create-user'>Crie agora</Link>
       </div>
     </div>
   );
