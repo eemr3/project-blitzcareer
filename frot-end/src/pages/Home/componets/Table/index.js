@@ -5,7 +5,12 @@ import Context from '../../../../context/Context';
 import styles from '../../../../styles/components/Table.module.css';
 
 function TableComponent() {
-  const { setNameUser, isSave, setIsSave } = useContext(Context);
+  const {
+    setNameUser,
+    isSave, setIsSave,
+    setDataTaskUpdate,
+    setValuesFormTasks,
+    setIsCreate } = useContext(Context);
   const [dataToDoUser, setDataToDoUser] = useState([]);
   const tokenLS = localStorage.getItem('token') || '';
 
@@ -20,15 +25,20 @@ function TableComponent() {
     };
 
     getDataUserApi();
-  }, [isSave, setNameUser, tokenLS]);
+  }, [isSave]);
 
   const handleDeleteTask = async (id) => {
-    const resultDelete = await api.delete(`/tasks/${id}`, {
+    await api.delete(`/tasks/${id}`, {
       headers: { Authorization: tokenLS },
     });
 
     setIsSave(!isSave);
-    console.log(resultDelete);
+  };
+
+  const handleUpdateTask = (titleT, descriptionT, statusT, id) => {
+    setValuesFormTasks({ title: titleT, description: descriptionT, status: statusT });
+    setDataTaskUpdate({ title: titleT, description: descriptionT, status: statusT, id });
+    setIsCreate(false);
   };
 
   return (
@@ -52,7 +62,9 @@ function TableComponent() {
                 type="button"
                 variant="secondary"
                 disabled={ task.status === 'Pronto' }
-                onClick={ () => { console.log('Oi'); } }
+                onClick={ () => handleUpdateTask(
+                  task.title, task.description, task.status, task.id,
+                ) }
               >
                 <i className="bi bi-pencil-square" />
               </Button>

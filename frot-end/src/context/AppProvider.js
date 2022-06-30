@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import GlobalContext from './Context';
-// import api from '../api/api';
-// import tokenMock from '../api/tokenMock';
 
 function AppProvider({ children }) {
   const [nameUser, setNameUser] = useState({});
   const [saveDataFormTask, setSaveDataFormTask] = useState();
+  const [valuesFormTask, setValuesFormTasks] = useState({
+    title: '',
+    description: '',
+    status: 'Pendente',
+  });
+  const [dataTaskUpdate, setDataTaskUpdate] = useState({});
   const [isSave, setIsSave] = useState(false);
+  const [isCreate, setIsCreate] = useState(true);
 
   return (
     <GlobalContext.Provider
@@ -16,8 +21,14 @@ function AppProvider({ children }) {
         nameUser,
         saveDataFormTask,
         setSaveDataFormTask,
+        valuesFormTask,
+        setValuesFormTasks,
         isSave,
         setIsSave,
+        setIsCreate,
+        isCreate,
+        dataTaskUpdate,
+        setDataTaskUpdate,
       } }
     >
       {children}
