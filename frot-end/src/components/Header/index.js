@@ -6,7 +6,7 @@ function Header() {
     <Navbar bg="dark" variant="dark">
       <Container>
         <Navbar.Brand>
-          <h1> Lista de tarefas - Ebytr</h1>
+          <h1>Ebytr - Lista de tarefas</h1>
         </Navbar.Brand>
       </Container>
     </Navbar>
