@@ -20,9 +20,10 @@ const getAllUsers = async () => {
   return users;
 };
 
-const getByIdUser = async (id) => {
+const getByIdUser = async (idU) => {
+  const idUser = Number(idU);
   const user = await User.findOne({
-    where: id,
+    where: { id: idUser },
     include: [{ model: ToDo, as: 'toDos' }],
     attributes: { exclude: ['password'] },
   });
