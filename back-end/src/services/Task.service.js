@@ -1,4 +1,5 @@
 const { ToDo } = require('../database/models');
+const errorBase = require('../util/errorBase');
 
 const createTask = async ({ title, description, status, id }) => {
   const task = await ToDo.create({ title, description, status, userId: id });
@@ -14,7 +15,7 @@ const getAllTasks = async () => {
 const getTaskById = async (id) => {
   const task = await ToDo.findOne({ where: id });
   if (!task) {
-    throw new Error('Task not found');
+    throw errorBase(404, 'Task not found');
   }
 
   return task;
@@ -24,7 +25,7 @@ const updateTask = async ({ title, description, status, id }) => {
   const idTask = Number(id);
   const taskExist = await getTaskById(idTask);
   if (!taskExist) {
-    throw new Error('Task not found');
+    throw errorBase(404, 'Task not found');
   }
   const taskUpdated = await ToDo.update(
     { title, description, status },
@@ -32,7 +33,7 @@ const updateTask = async ({ title, description, status, id }) => {
   );
 
   if (taskUpdated === 0) {
-    throw new Error('Error updated');
+    throw errorBase(403, 'Error updated');
   }
   const task = await getTaskById(idTask);
   return task;
@@ -41,12 +42,12 @@ const updateTask = async ({ title, description, status, id }) => {
 const destroyTask = async (id) => {
   const taskExist = await getTaskById(id);
   if (!taskExist) {
-    throw new Error('Task not found');
+    throw errorBase(404, 'Task not found');
   }
 
   const deleteTask = await ToDo.destroy({ where: { id } });
   if (deleteTask === 0) {
-    throw new Error('Error deleted task');
+    throw errorBase(403, 'Error deleted task');
   }
 
   return { message: 'Task deleted successfully' };

@@ -1,5 +1,5 @@
 const bcryt = require('bcryptjs');
-const { createToken } = require('../auth/authToken');
+const errorBase = require('../util/errorBase');
 const { User, ToDo } = require('../database/models');
 
 const createNewUser = async (nameUser, emailUser, pwdUser) => {
@@ -27,7 +27,7 @@ const getByIdUser = async (id) => {
     attributes: { exclude: ['password'] },
   });
 
-  if (!user) throw new Error('User not foud');
+  if (!user) throw errorBase(404, 'User not foud');
 
   return user;
 };
