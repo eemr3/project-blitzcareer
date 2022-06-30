@@ -25,6 +25,7 @@ function TableComponent() {
     };
 
     getDataUserApi();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSave]);
 
   const handleDeleteTask = async (id) => {

@@ -49,11 +49,11 @@ describe('User', () => {
       });
     });
 
-    describe('rota "/users/:id"', () => {
+    describe('rota "/users/userid"', () => {
       it('busca todos os usuários cadastrados', async () => {
         chaiHttpResponse = await chai
           .request(app)
-          .get('/users/1')
+          .get('/users/userid')
           .set(
             'authorization',
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW1lcnNvbiBNb3JlaXJhIiwiZW1haWwiOiJlZW1yM0BlbWFpbC5jb20ifSwiaWF0IjoxNjU2NDY3NTg2LCJleHAiOjE2NTkwNTk1ODZ9.ANzAkwFwkUmkYLvS-XmoCSZoKqMYbcnjkv8v0PDRL4s',
