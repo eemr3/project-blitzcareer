@@ -1,34 +1,61 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import api from '../../../../api/api';
 import Context from '../../../../context/Context';
 
+const token = localStorage.getItem('token');
 function FormComponet() {
-  const { setSaveDataFormTask, setIsSave, nameUser } = useContext(Context);
-  const [valuesFormTask, setValuesFormTasks] = useState({
-    title: '',
-    description: '',
-    status: 'Pendente',
-    userId: nameUser.id,
-  });
+  const {
+    setSaveDataFormTask,
+    setIsSave,
+    isSave,
+    isCreate,
+    setIsCreate,
+    setValuesFormTasks,
+    valuesFormTask,
+    dataTaskUpdate,
+  } = useContext(Context);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const token = localStorage.getItem('token');
       const result = await api.post('/tasks', valuesFormTask, {
         headers: { Authorization: token },
       });
 
       setSaveDataFormTask(result.data);
-      setIsSave(true);
+      setValuesFormTasks({
+        title: '',
+        description: '',
+        status: 'Pendente',
+      });
+      setIsSave(!isSave);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleUpdat = async (event) => {
+    event.preventDefault();
+    const { id } = dataTaskUpdate;
+    try {
+      await api.put(`tasks/${id}`, valuesFormTask, {
+        headers: { Authorization: token },
+      });
+      setIsCreate(true);
+      setIsSave(!isSave);
+      setValuesFormTasks({
+        title: '',
+        description: '',
+        status: 'Pendente',
+      });
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <Form onSubmit={ handleSubmit }>
+    <Form onSubmit={ isCreate ? handleSubmit : handleUpdat }>
       <Row className="mb-3">
         <Form.Group as={ Col } controlId="formGridCity">
           <Form.Label>Titulo</Form.Label>
@@ -56,6 +83,7 @@ function FormComponet() {
         <Form.Group as={ Col } controlId="formGridZip">
           <Form.Label>Status</Form.Label>
           <Form.Select
+            value={ valuesFormTask.status }
             onChange={ (event) => setValuesFormTasks({
               ...valuesFormTask, status: event.target.value,
             }) }
@@ -66,10 +94,16 @@ function FormComponet() {
           </Form.Select>
         </Form.Group>
       </Row>
+      {isCreate ? (
+        <Button variant="success" type="submit">
+          Criar nova tarefa
+        </Button>
 
-      <Button variant="success" type="submit">
-        Submit
-      </Button>
+      ) : (
+        <Button variant="warning" type="submit">
+          Savar alteração
+        </Button>
+      )}
     </Form>
   );
 }
