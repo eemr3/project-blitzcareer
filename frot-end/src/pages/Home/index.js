@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import Header from '../../components/Header';
 import FormComponet from './componets/Form';
 import styles from '../../styles/pages/Home.module.css';
-import TableComponet from './componets/Table';
+import TableComponent from './componets/Table';
 
 function Home() {
   return (
@@ -17,7 +17,7 @@ function Home() {
         </h2>
         <FormComponet />
         <div className={ styles.containerTtable }>
-          <TableComponet />
+          <TableComponent />
         </div>
       </Container>
     </>
