@@ -2,7 +2,7 @@ const TaskService = require('../services/Task.service');
 
 const createTask = async (req, res) => {
   const { title, description, status } = req.body;
-  const { id } = req.data;
+  const { id } = req.data.user;
   const task = await TaskService.createTask({ title, description, status, id });
 
   return res.status(201).json(task);
@@ -21,7 +21,8 @@ const getTaskById = async (req, res) => {
 
     return res.status(200).json(task);
   } catch (error) {
-    return res.status(404).json({ message: error.message });
+    console.log(error);
+    return res.status(error.status).json({ message: error.message });
   }
 };
 
@@ -39,7 +40,7 @@ const updateTask = async (req, res) => {
 
     return res.status(200).json(task);
   } catch (error) {
-    return res.status(404).json({ message: error.message });
+    return res.status(error.status).json({ message: error.message });
   }
 };
 
@@ -50,7 +51,7 @@ const destroyTask = async (req, res) => {
 
     res.status(200).json(result);
   } catch (error) {
-    return res.status(404).json({ message: error.message });
+    return res.status(error.status).json({ message: error.message });
   }
 };
 

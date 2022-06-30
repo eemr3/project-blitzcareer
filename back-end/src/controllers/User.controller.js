@@ -15,12 +15,13 @@ const getAllUsers = async (_req, res) => {
 
 const getByIdUser = async (req, res) => {
   try {
-    const { id } = req.params;
+    // const { id } = req.params;
+    const { id } = req.data.user;
     const user = await UserService.getByIdUser(Number(id));
 
     return res.status(200).json(user);
   } catch (error) {
-    return res.status(404).json({ message: error.message });
+    return res.status(error.status).json({ message: error.message });
   }
 };
 

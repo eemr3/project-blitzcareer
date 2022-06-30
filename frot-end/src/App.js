@@ -1,10 +1,14 @@
+import React from 'react';
 import './App.css';
+import AppProvider from './context/AppProvider';
 import Router from './routes/Router';
 
 function App() {
   return (
     <div>
-      <Router />
+      <AppProvider>
+        <Router />
+      </AppProvider>
     </div>
   );
 }

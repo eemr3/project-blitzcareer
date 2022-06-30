@@ -1,6 +1,7 @@
 const bcrpt = require('bcryptjs');
 const { createToken } = require('../auth/authToken');
 const { User } = require('../database/models');
+const errorBase = require('../util/errorBase');
 
 const loginUser = async (emailUser, pwdUser) => {
   const user = await User.findOne({
@@ -10,7 +11,7 @@ const loginUser = async (emailUser, pwdUser) => {
   const pwdDecripted = await bcrpt.compare(pwdUser, user.password);
 
   if (!pwdDecripted || null) {
-    throw new Error('Incorrect email or password');
+    throw errorBase(401, 'Incorrect email or password');
   }
 
   const { id, name, email } = user;

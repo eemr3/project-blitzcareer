@@ -7,7 +7,7 @@ const loginUser = async (req, res) => {
 
     return res.status(200).json(user);
   } catch (error) {
-    return res.status(401).json({ message: error.message });
+    return res.status(error.status).json({ message: error.message });
   }
 };
 
