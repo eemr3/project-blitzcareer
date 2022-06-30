@@ -31,6 +31,7 @@ function NewUser() {
           <Form.Control
             type="text"
             placeholder="Nome completo"
+            required
             value={ newUserData.name }
             onChange={ (event) => setNewUserData(
               {
@@ -46,6 +47,7 @@ function NewUser() {
           <Form.Control
             type="email"
             placeholder="E-mail"
+            required
             value={ newUserData.email }
             onChange={ (event) => setNewUserData(
               {
@@ -60,6 +62,7 @@ function NewUser() {
           <Form.Control
             type="password"
             placeholder="Senha"
+            required
             value={ newUserData.password }
             onChange={ (event) => setNewUserData(
               {
