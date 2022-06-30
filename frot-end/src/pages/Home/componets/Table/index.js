@@ -42,13 +42,43 @@ function TableComponent() {
     setIsCreate(false);
   };
 
+  const handleOrderList = (col) => {
+    const n = 1;
+    const dataSort = [...dataToDoUser].sort(
+      (colA, colB) => (colA[col] > colB[col] ? 1 : -n),
+    );
+
+    setDataToDoUser(dataSort);
+  };
+
   return (
     <Table striped bordered hover variant="dark">
       <thead>
         <tr>
-          <th>Titulo</th>
+          <th
+            style={ { cursor: 'pointer' } }
+            aria-hidden="true"
+            onClick={ () => handleOrderList('title') }
+          >
+            Titulo
+          </th>
           <th>Descrição</th>
-          <th>Status</th>
+          <th
+            style={ { cursor: 'pointer' } }
+            aria-hidden="true"
+            onClick={ () => handleOrderList('createdAt') }
+          >
+            Data de criação
+
+          </th>
+          <th
+            style={ { cursor: 'pointer' } }
+            aria-hidden="true"
+            onClick={ () => handleOrderList('status') }
+          >
+            Status
+
+          </th>
           <th>Ação</th>
         </tr>
       </thead>
@@ -57,6 +87,7 @@ function TableComponent() {
           <tr key={ task.id }>
             <td>{task.title}</td>
             <td>{task.description}</td>
+            <td>{task.createdAt.split('-').reverse().join('/') }</td>
             <td>{task.status}</td>
             <td className={ styles.tdContent }>
               <Button
