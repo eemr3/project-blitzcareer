@@ -64,6 +64,7 @@ function FormComponet() {
             onChange={ (event) => setValuesFormTasks({
               ...valuesFormTask, title: event.target.value,
             }) }
+            required
           />
         </Form.Group>
 
@@ -77,6 +78,7 @@ function FormComponet() {
             onChange={ (event) => setValuesFormTasks({
               ...valuesFormTask, description: event.target.value,
             }) }
+            required
           />
         </Form.Group>
 

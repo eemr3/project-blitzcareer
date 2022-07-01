@@ -1,0 +1,12 @@
+.containerHeader {
+  align-items: center;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.containerHeader i {
+  cursor: pointer;
+  font-size: 30px;
+}
