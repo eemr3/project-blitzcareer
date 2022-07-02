@@ -1,7 +1,6 @@
 const { taskSchema } = require('../schemas/TaskSchema');
 
 const taskMiddleware = (req, res, next) => {
-  console.log(req.body);
   const { error } = taskSchema.validate(req.body);
 
   if (error) {
