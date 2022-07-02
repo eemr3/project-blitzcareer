@@ -8,6 +8,8 @@ const loginUser = async (emailUser, pwdUser) => {
     where: { email: emailUser },
   });
 
+  if (!user) throw errorBase(404, 'Incorrect email or password');
+  
   const pwdDecripted = await bcrpt.compare(pwdUser, user.password);
 
   if (!pwdDecripted || null) {

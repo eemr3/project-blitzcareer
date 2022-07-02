@@ -5,7 +5,7 @@ const {
   checkPropertyExists,
 } = require('sequelize-test-helpers');
 
-const ToDoModel = require('../../database/models/todo');
+const ToDoModel = require('../../../src/database/models/todo');
 
 describe('O model de ToDo', () => {
   const ToDo = ToDoModel(sequelize, dataTypes);

@@ -4,14 +4,14 @@ module.exports = {
   development: {
     username: process.env.MYSQL_USERNAME,
     password: process.env.MYSQL_PWD,
-    database: process.env.NODE_ENV === 'development' && 'todo_list_db',
+    database: 'todo_list_db',
     host: process.env.MYSQL_HOST,
     dialect: 'mysql',
   },
   test: {
     username: process.env.MYSQL_USERNAME,
     password: process.env.MYSQL_PWD,
-    database: process.env.NODE_ENV === 'test' && 'todo_list_db_test',
+    database: 'todo_list_db',
     host: process.env.MYSQL_HOST,
     dialect: 'mysql',
   },
