@@ -34,4 +34,11 @@ describe('Tela de Login', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/create-user');
   });
+
+  it('renderiz botão "Entrar"', () => {
+    renderWithRouter(<App />);
+    const button = screen.getByRole('button', { name: 'Entrar' });
+    expect(button).toBeInTheDocument();
+    userEvent.click(button);
+  });
 });
