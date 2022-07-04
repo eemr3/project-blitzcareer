@@ -4,6 +4,7 @@ import api from '../../../../api/api';
 import Context from '../../../../context/Context';
 import styles from '../../../../styles/components/Table.module.css';
 
+const tokenLS = localStorage.getItem('token') || '';
 function TableComponent() {
   const {
     setNameUser,
@@ -12,7 +13,6 @@ function TableComponent() {
     setValuesFormTasks,
     setIsCreate } = useContext(Context);
   const [dataToDoUser, setDataToDoUser] = useState([]);
-  const tokenLS = localStorage.getItem('token') || '';
 
   useEffect(() => {
     const getDataUserApi = async () => {
@@ -85,10 +85,34 @@ function TableComponent() {
       <tbody>
         {dataToDoUser.map((task) => (
           <tr key={ task.id }>
-            <td>{task.title}</td>
-            <td>{task.description}</td>
-            <td>{task.createdAt.split('-').reverse().join('/') }</td>
-            <td>{task.status}</td>
+            <td
+              className={ task.status === 'Pronto'
+                ? styles.completeTask : '' }
+            >
+              {task.title}
+
+            </td>
+            <td
+              className={ task.status === 'Pronto'
+                ? styles.completeTask : '' }
+            >
+              {task.description}
+
+            </td>
+            <td
+              className={ task.status === 'Pronto'
+                ? styles.completeTask : '' }
+            >
+              {task.createdAt.split('-').reverse().join('/') }
+
+            </td>
+            <td
+              className={ task.status === 'Pronto'
+                ? styles.completeTask : '' }
+            >
+              {task.status}
+
+            </td>
             <td className={ styles.tdContent }>
               <Button
                 type="button"

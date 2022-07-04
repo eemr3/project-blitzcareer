@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import api from '../../api/api';
 import styles from '../../styles/pages/Login.module.css';
 
@@ -18,14 +19,24 @@ function Login() {
 
       localStorage.setItem('token', result.data.token);
       navigate('/home');
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
+      toast.error(err.response.data.message, {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
   return (
-    <div className={ styles.container }>
 
+    <div className={ styles.container }>
+      <ToastContainer />
       <h1 className={ styles.title }>Login</h1>
       <Form onSubmit={ handleSubmit }>
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -72,6 +83,7 @@ function Login() {
       </div>
 
     </div>
+
   );
 }
 
