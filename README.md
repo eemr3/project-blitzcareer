@@ -5,6 +5,6 @@ Aplicação pra controlar tarefas do dia, onde podera adicionar, editar e remove
 
 ## Documentação
 
-[Front-End](https://link-da-documentação) - Front-end da aplicação
+[Front-End](https://github.com/eemr3/project-blitzcareer/tree/main/front-end) - Front-end da aplicação
 
-[Back-End](https://link-da-documentação) - Back-end da aplicação
+[Back-End](https://github.com/eemr3/project-blitzcareer/tree/main/back-end) - Back-end da aplicação
