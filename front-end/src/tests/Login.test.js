@@ -25,4 +25,13 @@ describe('Tela de Login', () => {
     expect(inputPassword).toBeInTheDocument();
     expect(inputPassword).toHaveAttribute('type', 'password');
   });
+
+  it('renderiza link "Crie agora"', () => {
+    const { history } = renderWithRouter(<App />);
+    const link = screen.getByRole('link', { name: 'Crie agora' });
+    expect(link).toBeInTheDocument();
+    userEvent.click(link);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/create-user');
+  });
 });
