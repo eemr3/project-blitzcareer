@@ -1,0 +1,8 @@
+.tdContent {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.completeTask {
+  text-decoration: line-through;
+}
