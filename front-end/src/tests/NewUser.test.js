@@ -32,4 +32,13 @@ describe('Tela de New User', () => {
     expect(inputPassword).toBeInTheDocument();
     expect(inputPassword).toHaveAttribute('type', 'password');
   });
+
+  it('renderiza link "Já possui conta?"', () => {
+    const { history } = renderWithRouter(<NewUser />);
+    const link = screen.getByRole('link', { name: 'Já possui conta?' });
+    expect(link).toBeInTheDocument();
+    userEvent.click(link);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/login');
+  });
 });
