@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import api from '../../api/api';
 import styles from '../../styles/pages/Login.module.css';
 
 function Login() {
-  const navigate = useNavigate();
+  const navigate = useHistory();
   const [inputLogin, setInputLogin] = useState({
     email: '',
     password: '',
@@ -18,7 +18,7 @@ function Login() {
       const result = await api.post('/login', inputLogin);
 
       localStorage.setItem('token', result.data.token);
-      navigate('/home');
+      navigate.push('/home');
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.message, {
