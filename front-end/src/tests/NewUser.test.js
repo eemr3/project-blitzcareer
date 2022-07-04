@@ -41,4 +41,11 @@ describe('Tela de New User', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/login');
   });
+
+  it('renderiz botão "Criar conta"', () => {
+    renderWithRouter(<NewUser />);
+    const button = screen.getByRole('button', { name: 'Criar conta' });
+    expect(button).toBeInTheDocument();
+    userEvent.click(button);
+  });
 });
