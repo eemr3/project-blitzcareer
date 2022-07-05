@@ -57,8 +57,7 @@ npm database
   cd front-end
 ```
 
-[Front-End](https://github.com/eemr3/project-blitzcareer/tree/main/front-end) - Front-end da aplicação
-
+- [Front-End](https://github.com/eemr3/project-blitzcareer/tree/main/front-end)
 ### Informção do Back-end da aplicação
 
 - Diretório do Back-end
