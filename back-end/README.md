@@ -15,6 +15,19 @@ Back end responsável por gerência os end-points da api.
 - Ordenar as tarefas por: Titulo / Data de criação / Status
 
 
+## Tecnologias usadas
+- NodeJs
+- Express
+- Dotenv
+- Jsonwbtoken
+- Bcryptjs
+- Jest
+- Mysql2
+- Sequelize
+- Nodemon
+- Supertest
+- Eslint
+
 ## Variáveis de Ambiente
 
 Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
