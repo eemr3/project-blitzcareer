@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Navbar } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import Context from '../../context/Context';
 import styles from '../../styles/components/Header.module.css';
 
 function Header() {
   const navigate = useHistory();
+  const { setNameUser } = useContext(Context);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    setNameUser({ id: '', name: '' });
     navigate.push('/');
   };
 

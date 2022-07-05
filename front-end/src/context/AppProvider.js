@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import GlobalContext from './Context';
 
 function AppProvider({ children }) {
-  const [nameUser, setNameUser] = useState({});
+  const [nameUser, setNameUser] = useState({
+    id: '',
+    name: '',
+  });
   const [saveDataFormTask, setSaveDataFormTask] = useState();
   const [valuesFormTask, setValuesFormTasks] = useState({
     title: '',

@@ -4,7 +4,6 @@ import api from '../../../../api/api';
 import Context from '../../../../context/Context';
 import styles from '../../../../styles/components/Table.module.css';
 
-const tokenLS = localStorage.getItem('token') || '';
 function TableComponent() {
   const {
     setNameUser,
@@ -15,13 +14,14 @@ function TableComponent() {
   const [dataToDoUser, setDataToDoUser] = useState([]);
 
   useEffect(() => {
+    const tokenLS = localStorage.getItem('token') || '';
     const getDataUserApi = async () => {
       const resultTaks = await api.get('/users/userid', {
         headers: { Authorization: tokenLS },
       });
-      const { id, name } = resultTaks.data;
+
       setDataToDoUser(resultTaks.data.toDos);
-      setNameUser({ id, name });
+      setNameUser({ id: resultTaks.data.id, name: resultTaks.data.name });
     };
 
     getDataUserApi();
