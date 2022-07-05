@@ -1,4 +1,3 @@
-
 # Back-end da Api
 
 Back end responsável por gerência os end-points da api.
@@ -60,7 +59,6 @@ Inicie o servidor
   npm run dev
 ```
 
-
 ## Rodando os testes
 
 Na pasta `back-end` rode o seguinte comando:
@@ -86,4 +84,3 @@ Link para documentação da [API](https://documenter.getpostman.com/view/9196209
 ## Autor
 
 - [@eemr3](https://www.github.com/eemr3)
-

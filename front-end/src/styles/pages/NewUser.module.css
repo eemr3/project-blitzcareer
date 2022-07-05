@@ -10,3 +10,12 @@
 .title {
   margin-bottom: 15px;
 }
+
+.linkToLogin {
+  margin-left: 10px;  
+}
+
+.contentBtnLink {
+  align-items: flex-end;
+  display: flex;
+}

@@ -45,8 +45,20 @@ Observação: O App roda na porta `localhost:3000`
   npm start
 ```
 
+## Rodando os testes
+
+Para rodar o test, rode o seguinte comando
+
+```bash
+  npm test
+```
+
+Para rodar o teste de cobertura, rode o seguinte comando
+
+```bash
+  npm run test:coverage
+```
 
 ## Autor
 
 - [@eemr3](https://www.github.com/eemr3)
-

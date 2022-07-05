@@ -49,17 +49,21 @@ npm database
 
 ## Documentação
 
+### Informção do Front-end da aplicação
+
 - Diretório do Front-end
+
 ```bash
   cd front-end
 ```
-### Informção do Front-end da aplicação
 
 [Front-End](https://github.com/eemr3/project-blitzcareer/tree/main/front-end) - Front-end da aplicação
 
+### Informção do Back-end da aplicação
+
 - Diretório do Back-end
+
 ```bash
   cd back-end
 ```
-### Informção do Back-end da aplicação
 - [Back-End](https://github.com/eemr3/project-blitzcareer/tree/main/back-end)

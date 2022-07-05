@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import api from '../../api/api';
 import styles from '../../styles/pages/NewUser.module.css';
 
 function NewUser() {
-  const navigate = useNavigate();
+  const navigate = useHistory();
   const [newUserData, setNewUserData] = useState({
     name: '',
     email: '',
@@ -16,7 +16,7 @@ function NewUser() {
     event.preventDefault();
     try {
       await api.post('/users', newUserData);
-      navigate('/');
+      navigate.push('/');
     } catch (error) {
       console.log(error);
     }
@@ -72,9 +72,13 @@ function NewUser() {
             ) }
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Criar conta
-        </Button>
+        <div className={ styles.contentBtnLink }>
+          <Button variant="primary" type="submit">
+            Criar conta
+          </Button>
+          <Link to="/login" className={ styles.linkToLogin }>Já possui conta?</Link>
+
+        </div>
       </Form>
     </div>
   );

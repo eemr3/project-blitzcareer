@@ -1,14 +1,14 @@
 import React from 'react';
 import { Container, Navbar } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styles from '../../styles/components/Header.module.css';
 
 function Header() {
-  const navigate = useNavigate();
+  const navigate = useHistory();
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    navigate('/');
+    navigate.push('/');
   };
 
   return (
