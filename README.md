@@ -44,7 +44,7 @@ Crie o banco de dados
 O banco de dados é criado com as tabelas `Users` e `ToDos` e é populado com algumas informaçoes iniciais.
 
 ```bash
-npm database
+npm run database
 ``` 
 
 ## Documentação
