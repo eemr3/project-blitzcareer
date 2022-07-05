@@ -60,7 +60,7 @@ Entre napasta `back-end` e crie um arquivo `.env`, adicione as variavei de ambie
 Dentro da pasta `back-end` rode o comando:
 
 ```bash
-npm database
+npm run database
 ``` 
 O banco de dados é criado com as tabelas `Users` e `ToDos` e é populado com algumas informaçoes iniciais.
 
