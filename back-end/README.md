@@ -59,7 +59,6 @@ Inicie o servidor
   npm run dev
 ```
 
-
 ## Rodando os testes
 
 Na pasta `back-end` rode o seguinte comando:
