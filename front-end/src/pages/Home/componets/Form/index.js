@@ -3,7 +3,6 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import api from '../../../../api/api';
 import Context from '../../../../context/Context';
 
-const token = localStorage.getItem('token');
 function FormComponet() {
   const {
     setSaveDataFormTask,
@@ -18,6 +17,7 @@ function FormComponet() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const token = localStorage.getItem('token');
     try {
       const result = await api.post('/tasks', valuesFormTask, {
         headers: { Authorization: token },
@@ -37,6 +37,7 @@ function FormComponet() {
 
   const handleUpdat = async (event) => {
     event.preventDefault();
+    const token = localStorage.getItem('token');
     const { id } = dataTaskUpdate;
     try {
       await api.put(`tasks/${id}`, valuesFormTask, {
