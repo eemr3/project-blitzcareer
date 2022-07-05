@@ -29,6 +29,7 @@ function TableComponent() {
   }, [isSave]);
 
   const handleDeleteTask = async (id) => {
+    const tokenLS = localStorage.getItem('token') || '';
     await api.delete(`/tasks/${id}`, {
       headers: { Authorization: tokenLS },
     });
