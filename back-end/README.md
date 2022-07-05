@@ -4,43 +4,6 @@
 Back end responsável por gerência os end-points da api.
 
 
-## Funcionalidades
-
-- Criar usúario
-- Realizer login
-- Gerar token de autenticação
-- Cadastrar tarefas
-- Editar tarefas
-- Apagar tarefas
-- Ordenar as tarefas por: Titulo / Data de criação / Status
-
-
-## Tecnologias usadas
-- NodeJs
-- Express
-- Dotenv
-- Jsonwbtoken
-- Bcryptjs
-- Jest
-- Mysql2
-- Sequelize
-- Nodemon
-- Supertest
-- Eslint
-
-## Variáveis de Ambiente
-
-Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
-(Os valor que está após o variável é um exemplo, você terá que por os valore correspondente as suas configuraçãoes)
-
-`MYSQL_USERNAME`=root
-
-`MYSQL_PWD`=123456
-
-`MYSQL_HOST`=localhost
-
-`API_PORT`=3003
-
 ## Requisitos
 
 Requisitos minimo para rodar o back-end da aplicação:
@@ -67,6 +30,43 @@ o seguinte comando:
 ```bash
 docker container ls
 ```
+
+## Tecnologias usadas
+- NodeJs
+- Express
+- Dotenv
+- Jsonwbtoken
+- Bcryptjs
+- Jest
+- Mysql2
+- Sequelize
+- Nodemon
+- Supertest
+- Eslint
+
+## Funcionalidades
+
+- Criar usúario
+- Realizer login
+- Gerar token de autenticação
+- Cadastrar tarefas
+- Editar tarefas
+- Apagar tarefas
+- Ordenar as tarefas por: Titulo / Data de criação / Status
+
+
+## Variáveis de Ambiente
+
+Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
+(Os valor que está após o variável é um exemplo, você terá que por os valore correspondente as suas configuraçãoes)
+
+`MYSQL_USERNAME`=root
+
+`MYSQL_PWD`=123456
+
+`MYSQL_HOST`=localhost
+
+`API_PORT`=3003
 
 ## Rodando localmente
 
