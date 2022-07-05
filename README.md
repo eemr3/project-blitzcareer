@@ -40,12 +40,29 @@ Instale as dependências
   npm install
 ```
 
-Crie o banco de dados
-O banco de dados é criado com as tabelas `Users` e `ToDos` e é populado com algumas informaçoes iniciais.
+## Variáveis de Ambiente
+
+Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
+
+Entre napasta `back-end` e crie um arquivo `.env`, adicione as variavei de ambiente listadas abaixo
+(Os valor que está após o variável é um exemplo, você terá que por os valore correspondente as suas configuraçãoes)
+
+`MYSQL_USERNAME`=root
+
+`MYSQL_PWD`=123456
+
+`MYSQL_HOST`=localhost
+
+`API_PORT`=3003
+
+## Crie o banco de dados
+
+Dentro da pasta `back-end` rode o comando:
 
 ```bash
 npm database
 ``` 
+O banco de dados é criado com as tabelas `Users` e `ToDos` e é populado com algumas informaçoes iniciais.
 
 ## Documentação
 

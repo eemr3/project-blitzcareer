@@ -31,20 +31,6 @@ Requisitos minimo para rodar o back-end da aplicação:
 - Editar tarefas
 - Apagar tarefas
 
-
-## Variáveis de Ambiente
-
-Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
-(Os valor que está após o variável é um exemplo, você terá que por os valore correspondente as suas configuraçãoes)
-
-`MYSQL_USERNAME`=root
-
-`MYSQL_PWD`=123456
-
-`MYSQL_HOST`=localhost
-
-`API_PORT`=3003
-
 ## Rodando localmente
 
 Entre na pasta do servidor

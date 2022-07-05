@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "database": "cd back-end && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+  "scripts": {    
     "preinstall": "(cd back-end && npm install); (cd front-end && npm install)",
     "install:apps": "(cd back-end && npm install); (cd front-end && npm install)"
   },

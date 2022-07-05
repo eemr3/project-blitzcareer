@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
+    "database": "cd back-end && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "start": "node src/api/server.js",    
     "drop": "npx sequelize-cli db:drop",
