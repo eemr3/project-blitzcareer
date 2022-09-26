@@ -75,6 +75,7 @@ O banco de dados é criado com as tabelas `Users` e `ToDos` e é populado com al
 ```
 
 - [Front-End](https://github.com/eemr3/project-blitzcareer/tree/main/front-end)
+
 ### Informção do Back-end da aplicação
 
 - Diretório do Back-end

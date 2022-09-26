@@ -44,6 +44,7 @@ Observação: O App roda na porta `localhost:3000`
 ```bash
   npm start
 ```
+Observação: A API precisa estar rodando para que o front-end possa funcionar corretamente.
 
 ## Rodando os testes
 
