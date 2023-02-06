@@ -9,7 +9,7 @@
     "start": "node src/api/server.js",
     "drop": "npx sequelize-cli db:drop",
     "seed": "npx sequelize-cli db:seed:all",
-    "test": "jest",
+    "test": "jest --watch",
     "test-coverage": "npm run pretest && jest -i --verbose --forceExit --coverage",
     "dev": "nodemon src/api/server.ts",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
