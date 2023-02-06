@@ -1,4 +1,4 @@
-const app = require('./app');
+import { app } from './app';
 require('dotenv').config();
 
 const PORT = process.env.API_PORT || 3001;
