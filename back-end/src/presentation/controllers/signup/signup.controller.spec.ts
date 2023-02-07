@@ -18,10 +18,10 @@ const makeAddAccount = () => {
   class AddAccountStub implements AddAccount {
     add(accoutn: AddAccountModel): AccountModel {
       const fakeAccout = {
-        id: 'validId',
-        name: 'validName',
-        email: 'validEmail@email.com',
-        password: 'validPassword',
+        id: 'valid_id',
+        name: 'valid_name',
+        email: 'valid_email@email.com',
+        password: 'valid_password',
       };
       return fakeAccout;
     }
@@ -196,9 +196,9 @@ describe('Signup Controller', () => {
     sut.handle(httpRequest);
 
     expect(addSpy).toHaveBeenCalledWith({
-      name: 'any_name',
-      email: 'any_email@mail.com',
-      password: 'any_password',
+      name: 'valid_name',
+      email: 'valid_email@email.com',
+      password: 'valid_password',
     });
   });
 
@@ -221,5 +221,28 @@ describe('Signup Controller', () => {
     const response = sut.handle(httpRequest);
     expect(response.statusCode).toBe(500);
     expect(response.body).toEqual(new ServerError());
+  });
+
+  it('should return 201 if valid data is provider', () => {
+    const { sut } = makeSut();
+
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        email: 'invalid_email@mail.com',
+        password: 'any_password',
+        passwordConfirmation: 'any_password',
+      },
+    };
+
+    const response = sut.handle(httpRequest);
+
+    expect(response.statusCode).toBe(201);
+    expect(response.body).toEqual({
+      id: 'valid_id',
+      name: 'valid_name',
+      email: 'valid_email@email.com',
+      password: 'valid_password',
+    });
   });
 });
