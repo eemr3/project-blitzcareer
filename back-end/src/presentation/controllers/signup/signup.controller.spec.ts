@@ -1,11 +1,9 @@
+import { AccountModel } from '../../../domain/models/account';
+import { AddAccount, AddAccountModel } from '../../../domain/use-cases/add-account';
 import { InvalidParamError, MissingParamError, ServerError } from '../../errors';
 import { EmailValidator } from '../../protocols';
 import { SignUpController } from './signup.controller';
 
-interface SutTypes {
-  sut: SignUpController;
-  emailValidatorStub: EmailValidator;
-}
 // cria factories
 const makeEmailValidator = () => {
   class EmailValidatorStub implements EmailValidator {
@@ -16,12 +14,35 @@ const makeEmailValidator = () => {
   return new EmailValidatorStub();
 };
 
+const makeAddAccount = () => {
+  class AddAccountStub implements AddAccount {
+    add(accoutn: AddAccountModel): AccountModel {
+      const fakeAccout = {
+        id: 'validId',
+        name: 'validName',
+        email: 'validEmail@email.com',
+        password: 'validPassword',
+      };
+      return fakeAccout;
+    }
+  }
+  return new AddAccountStub();
+};
+
+interface SutTypes {
+  sut: SignUpController;
+  emailValidatorStub: EmailValidator;
+  addAccountStub: AddAccount;
+}
+
 const makeSut = (): SutTypes => {
   const emailValidatorStub = makeEmailValidator();
-  const sut = new SignUpController(emailValidatorStub);
+  const addAccountStub = makeAddAccount();
+  const sut = new SignUpController(emailValidatorStub, addAccountStub);
   return {
     sut,
     emailValidatorStub,
+    addAccountStub,
   };
 };
 
@@ -32,7 +53,7 @@ describe('Signup Controller', () => {
       body: {
         email: 'any_email@mail.com',
         password: 'any_password',
-        passwordConfirmation: 'any_passoerd',
+        passwordConfirmation: 'any_password',
       },
     };
     const response = sut.handle(httpRequest);
@@ -46,7 +67,7 @@ describe('Signup Controller', () => {
       body: {
         name: 'any_name',
         password: 'any_password',
-        passwordConfirmation: 'any_passoerd',
+        passwordConfirmation: 'any_password',
       },
     };
     const response = sut.handle(httpRequest);
@@ -60,7 +81,7 @@ describe('Signup Controller', () => {
       body: {
         name: 'any_name',
         email: 'any_email@mail.com',
-        passwordConfirmation: 'any_passoerd',
+        passwordConfirmation: 'any_password',
       },
     };
 
@@ -76,7 +97,7 @@ describe('Signup Controller', () => {
       body: {
         name: 'any_name',
         email: 'any_email@mail.com',
-        password: 'any_passoerd',
+        password: 'any_password',
       },
     };
 
@@ -92,8 +113,8 @@ describe('Signup Controller', () => {
       body: {
         name: 'any_name',
         email: 'any_email@mail.com',
-        password: 'any_passoerd',
-        passwordConfirmation: 'invalid_passoerd',
+        password: 'any_password',
+        passwordConfirmation: 'invalid_password',
       },
     };
 
@@ -110,8 +131,8 @@ describe('Signup Controller', () => {
       body: {
         name: 'any_name',
         email: 'invalid_email@mail.com',
-        password: 'any_passoerd',
-        passwordConfirmation: 'any_passoerd',
+        password: 'any_password',
+        passwordConfirmation: 'any_password',
       },
     };
 
@@ -128,8 +149,8 @@ describe('Signup Controller', () => {
       body: {
         name: 'any_name',
         email: 'any_email@mail.com',
-        password: 'any_passoerd',
-        passwordConfirmation: 'any_passoerd',
+        password: 'any_password',
+        passwordConfirmation: 'any_password',
       },
     };
 
@@ -148,13 +169,36 @@ describe('Signup Controller', () => {
       body: {
         name: 'any_name',
         email: 'any_email@mail.com',
-        password: 'any_passoerd',
-        passwordConfirmation: 'any_passoerd',
+        password: 'any_password',
+        passwordConfirmation: 'any_password',
       },
     };
 
     const response = sut.handle(httpRequest);
     expect(response.statusCode).toBe(500);
     expect(response.body).toEqual(new ServerError());
+  });
+
+  it('should call AddAccount with correct values', () => {
+    const { sut, addAccountStub } = makeSut();
+
+    const addSpy = jest.spyOn(addAccountStub, 'add');
+
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        email: 'any_email@mail.com',
+        password: 'any_password',
+        passwordConfirmation: 'any_password',
+      },
+    };
+
+    sut.handle(httpRequest);
+
+    expect(addSpy).toHaveBeenCalledWith({
+      name: 'any_name',
+      email: 'any_email@mail.com',
+      password: 'any_password',
+    });
   });
 });
