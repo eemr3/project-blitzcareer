@@ -1,9 +1,13 @@
+import { AddAccount } from '../../../domain/use-cases/add-account';
 import { MissingParamError, InvalidParamError } from '../../errors';
 import { badRequest, serverError } from '../../helpers/http.helper';
 import { Controller, EmailValidator, HttpRequest, HttpResponse } from '../../protocols';
 
 export class SignUpController implements Controller {
-  constructor(private readonly emailValidator: EmailValidator) {}
+  constructor(
+    private readonly emailValidator: EmailValidator,
+    private readonly addAccount: AddAccount,
+  ) {}
 
   handle(httpRequest: HttpRequest): HttpResponse {
     try {
@@ -24,6 +28,12 @@ export class SignUpController implements Controller {
       if (!isValied) {
         return badRequest(new InvalidParamError('email'));
       }
+
+      this.addAccount.add({
+        name: 'any_name',
+        email: 'any_email@mail.com',
+        password: 'any_password',
+      });
     } catch (error) {
       return serverError();
     }
