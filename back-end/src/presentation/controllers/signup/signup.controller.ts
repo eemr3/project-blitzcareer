@@ -1,6 +1,6 @@
 import { AddAccount } from '../../../domain/use-cases/add-account';
 import { MissingParamError, InvalidParamError } from '../../errors';
-import { badRequest, serverError } from '../../helpers/http.helper';
+import { badRequest, serverError, success } from '../../helpers/http.helper';
 import { Controller, EmailValidator, HttpRequest, HttpResponse } from '../../protocols';
 
 export class SignUpController implements Controller {
@@ -35,10 +35,7 @@ export class SignUpController implements Controller {
         password: 'valid_password',
       });
 
-      return {
-        statusCode: 201,
-        body: account,
-      };
+      return success(account);
     } catch (error) {
       return serverError();
     }
