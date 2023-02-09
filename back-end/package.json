@@ -26,14 +26,14 @@
     "express": "^4.18.1",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^5.0.1",
     "mysql2": "^2.3.3",
+    "mongodb": "^4.1.1",
     "sequelize": "^6.21.0",
     "sequelize-test-helpers": "^1.4.2",
     "validator": "^13.9.0"
   },
   "devDependencies": {
-    "@shelf/jest-mongodb": "^4.1.6",
+    "@shelf/jest-mongodb": "^2.0.3",
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
