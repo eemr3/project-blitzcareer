@@ -1,5 +1,5 @@
-import * as express from 'express';
-const app = express();
+import app from './config/app';
+
 const port = process.env.PORT || 3001;
 
 app.get('/', (req, res) => res.send('Inicio de uma jornada :)'));
