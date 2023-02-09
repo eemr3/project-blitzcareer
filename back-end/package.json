@@ -10,7 +10,9 @@
     "drop": "npx sequelize-cli db:drop",
     "seed": "npx sequelize-cli db:seed:all",
     "test": "jest --watch",
-    "test-coverage": "npm run pretest && jest -i --verbose --forceExit --coverage",
+    "test:unit": "npm test -- --watch -c jest-unit-config.js",
+    "test:integration": "npm test -- --watch -c jest-integration-config.js",
+    "test:coverage": "jest -i --verbose --forceExit --coverage",
     "dev": "nodemon --watch '**/*.ts' --exec 'ts-node' src/main/server.ts",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
@@ -18,6 +20,7 @@
   "author": "Emerson Moreira",
   "license": "ISC",
   "dependencies": {
+    "@types/supertest": "^2.0.12",
     "@types/validator": "^13.7.12",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
