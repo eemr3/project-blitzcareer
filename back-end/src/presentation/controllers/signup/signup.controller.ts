@@ -19,7 +19,7 @@ export class SignUpController implements Controller {
         }
       }
 
-      const { email, password, passwordConfirmation } = httpRequest.body;
+      const { name, email, password, passwordConfirmation } = httpRequest.body;
       if (password !== passwordConfirmation) {
         return badRequest(new InvalidParamError('passwordConfirmation'));
       }
@@ -28,12 +28,8 @@ export class SignUpController implements Controller {
       if (!isValied) {
         return badRequest(new InvalidParamError('email'));
       }
-
-      const account = await this.addAccount.add({
-        name: 'valid_name',
-        email: 'valid_email@email.com',
-        password: 'valid_password',
-      });
+      const { body } = httpRequest;
+      const account = await this.addAccount.add(body);
 
       return success(account);
     } catch (error) {

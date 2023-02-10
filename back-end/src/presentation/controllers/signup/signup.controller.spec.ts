@@ -179,7 +179,7 @@ describe('Signup Controller', () => {
     expect(response.body).toEqual(new ServerError());
   });
 
-  it('should call AddAccount with correct values', () => {
+  it('should call AddAccount with correct values', async () => {
     const { sut, addAccountStub } = makeSut();
 
     const addSpy = jest.spyOn(addAccountStub, 'add');
@@ -187,18 +187,19 @@ describe('Signup Controller', () => {
     const httpRequest = {
       body: {
         name: 'any_name',
-        email: 'any_email@mail.com',
+        email: 'any_email@email.com',
         password: 'any_password',
         passwordConfirmation: 'any_password',
       },
     };
 
-    sut.handle(httpRequest);
+    await sut.handle(httpRequest);
 
     expect(addSpy).toHaveBeenCalledWith({
-      name: 'valid_name',
-      email: 'valid_email@email.com',
-      password: 'valid_password',
+      name: 'any_name',
+      email: 'any_email@email.com',
+      password: 'any_password',
+      passwordConfirmation: 'any_password',
     });
   });
 
@@ -228,10 +229,10 @@ describe('Signup Controller', () => {
 
     const httpRequest = {
       body: {
-        name: 'any_name',
-        email: 'invalid_email@mail.com',
-        password: 'any_password',
-        passwordConfirmation: 'any_password',
+        name: 'valid_name',
+        email: 'valid_email@email.com',
+        password: 'valid_password',
+        passwordConfirmation: 'valid_password',
       },
     };
 
