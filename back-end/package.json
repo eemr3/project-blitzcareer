@@ -12,6 +12,7 @@
   "author": "Emerson Moreira",
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "^4.16.1",
     "bcrypt": "^5.1.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
