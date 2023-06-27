@@ -1,6 +1,6 @@
 import * as jwt from 'jsonwebtoken';
 
-export class JwtGenrete {
+export class JwtGenerate {
   generateJwt(userInfo: any, expiresIn: number, secretOrKey: string) {
     const payload = {
       sub: userInfo.id,
