@@ -3,8 +3,10 @@ import { PrismaService } from '../../../infra/database/prisma.service';
 import { UserMySqlRepository } from '../../repositories/user-mysql.repository';
 import { UserController } from '../../user.controller';
 import { UserService } from '../../user.service';
+import { validationMiddleware } from '../../middleware/validation.middleware';
+import { CreateUserDto } from '../../dtos/create-user.dto';
 
-class UserRouter {
+export class UserRouter {
   public routes: Application = express();
   private prisma = new PrismaService();
   private repository = new UserMySqlRepository(this.prisma);
@@ -16,8 +18,10 @@ class UserRouter {
   }
 
   createNewUser() {
-    this.routes.post('/users', this.controller.createUser.bind(this.controller));
+    this.routes.post(
+      '/users',
+      validationMiddleware(CreateUserDto),
+      this.controller.createUser.bind(this.controller),
+    );
   }
 }
-
-export default new UserRouter().routes;
