@@ -1,12 +1,11 @@
-import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../../infra/database/prisma.service';
-import { CreateUserDto } from '../dtos/create-user.dto';
-import { UserRepository } from './user.repository';
 import { ConflictException } from '../../shared/exceptions/conflict.exception';
 import { NotFoundException } from '../../shared/exceptions/not-found.exception';
+import { CreateUserDto } from '../dtos/create-user.dto';
+import { UserByEmailResponse, UserResponse } from '../interface/user-response';
 import { UserSerialize } from '../serialize/user.serialize';
-import { UserResponse } from '../interface/user-response';
+import { UserRepository } from './user.repository';
 
 export class UserMySqlRepository implements UserRepository {
   private salt = 10;
@@ -44,7 +43,7 @@ export class UserMySqlRepository implements UserRepository {
     return this.serializerResponse.dbToResponse(user);
   }
 
-  async findByEmail(email: string): Promise<User | null> {
+  async findByEmail(email: string): Promise<UserByEmailResponse | null> {
     return await this.prisma.user.findUnique({ where: { email } });
   }
 

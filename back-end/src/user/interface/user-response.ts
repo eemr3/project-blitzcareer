@@ -5,3 +5,10 @@ export interface UserResponse {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface UserByEmailResponse {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+}
