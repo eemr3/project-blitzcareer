@@ -1,6 +1,5 @@
 export class TaskSerialize {
   dbToResponseGet(task: any) {
-    console.log(task);
     return {
       id: task.id,
       title: task.title,

@@ -14,7 +14,6 @@ export class UserMySqlRepository implements UserRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(userData: CreateUserDto): Promise<UserResponse> {
-    console.log(userData);
     const userExists = await this.findByEmail(userData.email);
 
     if (userExists) {
