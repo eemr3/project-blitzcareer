@@ -1,5 +1,4 @@
 import { TaskRepository } from './repositories/task.repository';
-import { TaskSerialize } from './serialize/task.serialize';
 
 export class TaskService {
   constructor(private taskRepository: TaskRepository) {}

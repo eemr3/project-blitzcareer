@@ -43,7 +43,7 @@ export class TaskRoutes {
     this.routes.get(
       '/tasks/:id',
       this.authMiddleware.authMiddleware.bind(this.authMiddleware),
-      this.taskController.findoneTask.bind(this.taskController),
+      this.taskController.findOneTask.bind(this.taskController),
     );
   }
 

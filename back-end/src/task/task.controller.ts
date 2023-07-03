@@ -21,16 +21,18 @@ export class TaskController {
     return res.status(200).json(tasks);
   }
 
-  async findoneTask(req: Request, res: Response) {
+  async findOneTask(req: Request, res: Response) {
     try {
       const { id } = req.params;
       const task = await this.taskService.findOneTask(Number(id));
       return res.status(200).json(task);
     } catch (err) {
       if (err instanceof NotFoundException) {
-        return res.status(404).json({ message: err.message });
+        return res
+          .status(404)
+          .json({ statusCode: 404, message: err.message, error: 'Not Found' });
       }
-      return res.status(500).json({ message: 'Internal server error' });
+      return res.status(500).json({ statusCode: 500, message: 'Internal server error' });
     }
   }
 
@@ -41,9 +43,11 @@ export class TaskController {
       return res.status(200).json(task);
     } catch (error) {
       if (error instanceof NotFoundException) {
-        return res.status(404).json({ message: error.message });
+        return res
+          .status(404)
+          .json({ statusCode: 404, message: error.message, error: 'Not Found' });
       }
-      return res.status(500).json({ message: 'Internal server error' });
+      return res.status(500).json({ statusCode: 500, message: 'Internal server error' });
     }
   }
 
@@ -51,12 +55,14 @@ export class TaskController {
     try {
       const { id } = req.params;
       const task = await this.taskService.deleteTask(Number(id));
-      return res.status(200).json(task);
+      return res.status(204).end();
     } catch (error) {
       if (error instanceof NotFoundException) {
-        return res.status(404).json({ message: error.message });
+        return res
+          .status(404)
+          .json({ statusCode: 404, message: error.message, error: 'Not Found' });
       }
-      return res.status(500).json({ message: 'Internal server error' });
+      return res.status(500).json({ statusCode: 500, message: 'Internal server error' });
     }
   }
 }

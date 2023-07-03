@@ -2,7 +2,7 @@ export interface TaskCreateResponse {
   id: number;
   title: string;
   description: string;
-  status: boolean;
+  status: string;
   userId: number | null;
   createdAt: Date;
   updatedAt: Date;
