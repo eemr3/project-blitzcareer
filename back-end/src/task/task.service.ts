@@ -7,8 +7,8 @@ export class TaskService {
     return await this.taskRepository.createTask(task);
   }
 
-  async findAllTask() {
-    return await this.taskRepository.findAllTask();
+  async findAllTask(id: number) {
+    return await this.taskRepository.findAllTask(id);
   }
 
   async findOneTask(id: number) {
