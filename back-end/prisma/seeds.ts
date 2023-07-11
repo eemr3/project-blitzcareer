@@ -19,6 +19,28 @@ const TASKS = [
   },
 ];
 
+async function seedUserAdmin() {
+  const userExists = await prisma.user.findFirst({
+    where: { email: 'eemr3@email.com' },
+  });
+
+  if (userExists) return console.info('[SEED] Admin já cadastrado');
+
+  await prisma.user
+    .create({
+      data: {
+        name: 'John Doe',
+        email: 'john.doe@email.com',
+        password: '$2b$10$y3NB9TO1dcVyMc01MA27/OB/SWHYNYlc6ryI1ZJdcL6eBQNVJito2', //senha: Abc12@34
+        createdAt: new Date(),
+      },
+    })
+    .then(() => console.info('[SEED] Successfully create user admin record'))
+    .catch((e) => console.info('[SEED] Successfully create user admin record', e));
+}
+
+seedUserAdmin();
+
 async function seedTasks() {
   // const tasks = await Promise.all(
   //   TASKS.map(async (task) => {
@@ -45,6 +67,7 @@ async function seedTasks() {
             data: {
               title: task.title,
               description: task.description,
+              userId: task.userId,
             },
           }),
       ),
@@ -56,25 +79,3 @@ async function seedTasks() {
 }
 
 seedTasks();
-
-async function seedUserAdmin() {
-  const userExists = await prisma.user.findFirst({
-    where: { email: 'eemr3@email.com' },
-  });
-
-  if (userExists) return console.info('[SEED] Admin já cadastrado');
-
-  await prisma.user
-    .create({
-      data: {
-        name: 'Emerson Moreira',
-        email: 'eemr3@email.com',
-        password: '$2a$10$jAgEfROGhBUfFoyZ3zJFW.LREbApvhvxX9Ze61M8VUek/ouG5CDI6', //senha: 123456
-        createdAt: new Date(),
-      },
-    })
-    .then(() => console.info('[SEED] Successfully create user admin record'))
-    .catch((e) => console.info('[SEED] Successfully create user admin record', e));
-}
-
-seedUserAdmin();
