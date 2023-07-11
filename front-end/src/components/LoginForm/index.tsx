@@ -1,12 +1,12 @@
 import { Formik } from 'formik';
 import Link from 'next/link';
 import { useContext } from 'react';
-import { TodoContext } from '../../context/todo.context';
-import { loginSchema } from '../../pages/login/login.schema';
+import { AuthContext } from '../../context/AuthContext';
+import { loginSchema } from './login.schema';
 import InputText from '../Form/InputText';
 
 export function LoginForm() {
-  const { sigIn } = useContext(TodoContext);
+  const { sigIn } = useContext(AuthContext);
 
   return (
     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -77,7 +77,9 @@ export function LoginForm() {
               </div>
               <button
                 type="submit"
-                className="w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                className="w-full text-white bg-primary-600 hover:bg-primary-700 
+                  focus:ring-4 focus:outline-none 
+                    focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
                 Entrar
               </button>
@@ -87,7 +89,7 @@ export function LoginForm() {
                   href="/register-account"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
-                  Cadastre-se
+                  Cadastre-se agora
                 </Link>
               </p>
             </form>

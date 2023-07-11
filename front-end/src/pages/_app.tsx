@@ -1,11 +1,14 @@
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
-import TodoProvider from '../context/todo.context';
+import TodoProvider from '../context/TodoContext';
+import AuthProvider from '../context/AuthContext';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <TodoProvider>
-      <Component {...pageProps} />
-    </TodoProvider>
+    <AuthProvider>
+      <TodoProvider>
+        <Component {...pageProps} />
+      </TodoProvider>
+    </AuthProvider>
   );
 }
