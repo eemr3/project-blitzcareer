@@ -1,28 +1,34 @@
+import dynamic from 'next/dynamic';
 import Board from '../../components/Board';
-import NavBar from '../../components/NavBar';
 import Page from '../../components/template/Page';
 import { withAuth } from '../../hof/withAuth';
-import { useAuthHttp } from '../../hooks/useAuthHttp';
+import { http } from '../../service/api';
+import { DataTasks } from '../../shared/interface/data-tasks';
 
-function Home() {
-  const { data: user, error } = useAuthHttp('users');
-  return user ? (
+const NoSSR = dynamic(() => import('../../components/NavBar'), { ssr: false });
+export interface HomeProps {
+  data: DataTasks[];
+}
+function Home(props: HomeProps) {
+  return (
     <Page>
-      <NavBar />
-      <Board />
+      <NoSSR />
+      <Board data={props.data} />
     </Page>
-  ) : null;
+  );
 }
 
 export const getServerSideProps = withAuth(
   async (ctx: any, cookies: any, payload: any) => {
-    // const { data } = await http.get("test-auth", {
-    //   headers: {
-    //     Authorization: `Bearer ${cookies.token}`,
-    //   },
-    // });
+    const { data } = await http.get('/tasks', {
+      headers: {
+        Authorization: `Bearer ${cookies.access_token}`,
+      },
+    });
+    console.log(data);
+
     return {
-      props: {},
+      props: { data },
     };
   },
 );
