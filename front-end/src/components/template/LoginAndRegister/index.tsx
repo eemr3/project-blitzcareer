@@ -12,7 +12,7 @@ export default function LoginAndRegister({ children, className }: LoginAndRegist
           href="#"
           className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
         >
-          To-Do List
+          <h1 className="sm:text-[40px] sm:mb-5">Ebytr </h1>
         </a>
         {children}
       </div>

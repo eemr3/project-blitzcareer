@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { http } from '../../service/api';
 import { getCookie } from '../../shared/cookies';
 import Column from '../Column';
 import InputText from '../Form/InputText';
+import { DataTasks } from '../../shared/interface/data-tasks';
+import { TodoContext } from '../../context/TodoContext';
 
-export type ICard = {
-  id?: number;
-  title: string;
-  description: string;
-  status: string;
-};
+export interface BoardProps {
+  data: DataTasks[];
+}
 
-const initialCards: ICard[] = [];
-
-const Board: React.FC = () => {
-  const [cards, setCards] = useState<ICard[]>(initialCards);
-  const [dataAddTask, setDataAddTask] = useState<ICard>({
-    title: '',
-    description: '',
-    status: '',
-  });
+const Board: React.FC<BoardProps> = ({ data }) => {
+  const {
+    cards,
+    setCards,
+    inputDataTask,
+    setInputDataTask,
+    isCreate,
+    updateTask,
+    editTask,
+    setIsCreate,
+  } = useContext(TodoContext);
 
   const handleDrop = async (
     event: React.DragEvent<HTMLDivElement>,
@@ -36,19 +37,12 @@ const Board: React.FC = () => {
       }
       return card;
     });
+
     setCards(updatedCards);
     try {
-      await http.put(
-        `/tasks/${cardId}`,
-        {
-          status: newStatus,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${getCookie('access_token')}`,
-          },
-        },
-      );
+      await editTask(cardId, {
+        status: newStatus,
+      });
     } catch (error) {}
   };
 
@@ -58,27 +52,40 @@ const Board: React.FC = () => {
 
   useEffect(() => {
     const getTasks = async () => {
-      const response = await http.get('/tasks', {
-        headers: {
-          Authorization: `Bearer ${getCookie('access_token')}`,
-        },
-      });
-      if (response.status === 200) {
-        setCards(response.data);
-      }
+      setCards(data);
     };
     getTasks();
-  }, []);
+  }, [data, setCards]);
 
   const handleSaveNewTask = async () => {
     const response = await http.post('/tasks', {
-      title: dataAddTask.title,
-      description: dataAddTask.description,
+      title: inputDataTask.title,
+      description: inputDataTask.description,
     });
     if (response.status === 201) {
       setCards([...cards, response.data]);
-      setDataAddTask({ title: '', description: '', status: '' });
+      setInputDataTask({ title: '', description: '', status: '' });
     }
+  };
+
+  const handleEditTask = async () => {
+    const data = {
+      title: inputDataTask.title,
+      description: inputDataTask.description,
+      status: updateTask.status,
+    };
+
+    await editTask(String(updateTask.id), data);
+    const index = cards.findIndex((card) => card.id === updateTask.id);
+    const newCards = [...cards];
+    newCards[index] = {
+      ...newCards[index],
+      title: inputDataTask.title,
+      description: inputDataTask.description,
+    };
+    setCards(newCards);
+    setInputDataTask({ title: '', description: '', status: '' });
+    setIsCreate(true);
   };
 
   return (
@@ -91,8 +98,10 @@ const Board: React.FC = () => {
             name="title"
             type="text"
             placeholder="Titulo"
-            value={dataAddTask.title}
-            onChange={(e) => setDataAddTask({ ...dataAddTask, title: e.target.value })}
+            value={inputDataTask.title}
+            onChange={(e) =>
+              setInputDataTask({ ...inputDataTask, title: e.target.value })
+            }
           />
           <InputText
             className="w-[530px]"
@@ -100,23 +109,25 @@ const Board: React.FC = () => {
             id="description"
             type="text"
             placeholder="Descrição"
-            value={dataAddTask.description}
+            value={inputDataTask.description}
             onChange={(e) =>
-              setDataAddTask({ ...dataAddTask, description: e.target.value })
+              setInputDataTask({ ...inputDataTask, description: e.target.value })
             }
           />
         </div>
 
         <div className="flex flex-col pt-2">
           <button
-            onClick={handleSaveNewTask}
-            className="w-[150px] text-white bg-blue-600 h-[40px]
+            onClick={isCreate ? handleSaveNewTask : handleEditTask}
+            className={`w-[150px] text-white ${
+              isCreate ? 'bg-blue-600' : 'bg-orange-600'
+            } h-[40px]
           hover:bg-primary-700 focus:ring-4 focus:outline-none
            focus:ring-primary-300 font-medium rounded-lg text-sm
            px-5 text-center dark:bg-primary-600
-           dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+           dark:hover:bg-primary-700 dark:focus:ring-primary-800`}
           >
-            Adicionar
+            {isCreate ? 'Adicionar' : 'Editar'}
           </button>
         </div>
       </div>
@@ -124,21 +135,21 @@ const Board: React.FC = () => {
         <Column
           title="Pendente"
           status="pending"
-          cards={cards.filter((card) => card.status === 'pending')}
+          cards={cards?.filter((card) => card.status === 'pending')}
           onDrop={handleDrop}
           onDragStart={handleDragStart}
         />
         <Column
           title="Em Progresso"
           status="in-progress"
-          cards={cards.filter((card) => card.status === 'in-progress')}
+          cards={cards?.filter((card) => card.status === 'in-progress')}
           onDrop={handleDrop}
           onDragStart={handleDragStart}
         />
         <Column
           title="Feito"
           status="done"
-          cards={cards.filter((card) => card.status === 'done')}
+          cards={cards?.filter((card) => card.status === 'done')}
           onDrop={handleDrop}
           onDragStart={handleDragStart}
         />
