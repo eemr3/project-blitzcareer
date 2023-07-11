@@ -1,11 +1,12 @@
 import React from 'react';
-import { ICard } from '../Board';
+
 import Card from '../Card';
+import { DataTasks } from '../../shared/interface/data-tasks';
 
 type ColumnProps = {
   title: string;
   status: string;
-  cards: ICard[];
+  cards: DataTasks[];
   onDrop: (event: React.DragEvent<HTMLDivElement>, newStatus: string) => void;
   onDragStart: (event: React.DragEvent<HTMLDivElement>, cardId: string) => void;
 };
