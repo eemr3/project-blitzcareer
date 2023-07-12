@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react';
 import { http } from '../service/api';
 import { DataTasks } from '../shared/interface/data-tasks';
+import { AxiosError } from 'axios';
 
 interface TodoProviderProps {
   children: React.ReactNode;
@@ -16,7 +17,7 @@ interface TodoContextProps {
   handlerAddTodo: () => void;
   setTodoData: (value: any) => void;
   todoDate: any;
-  createAccount: (data: DataRegister) => Promise<void>;
+  createAccount: (data: DataRegister) => Promise<any>;
   deleteTask: (id: string) => Promise<void>;
   open: boolean;
   setOpen: (value: boolean) => void;
@@ -69,9 +70,10 @@ export default function TodoProvider({ children }: TodoProviderProps) {
   const createAccount = async (data: DataRegister) => {
     try {
       const response = await http.post('/users', data);
-      console.log(response);
+      return response;
     } catch (error) {
       console.log(error);
+      return error as AxiosError;
     }
   };
 

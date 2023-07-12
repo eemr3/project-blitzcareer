@@ -3,6 +3,7 @@ import { createContext, useState } from 'react';
 import Cookies from 'js-cookie';
 import { http } from '../service/api';
 import { setCookie } from '../shared/cookies';
+import { AxiosError } from 'axios';
 
 interface AuthProviderProps {
   children: React.ReactNode;
@@ -14,7 +15,7 @@ interface DataLogin {
 }
 
 interface AuthContextProps {
-  sigIn: (data: DataLogin) => Promise<void>;
+  sigIn: (data: DataLogin) => Promise<any>;
   signout: () => void;
 }
 
@@ -27,10 +28,11 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     try {
       const response = await http.post('/login', data);
       setCookie('access_token', response.data.access_token);
-
       router.push('/home');
+      return response.data;
     } catch (error) {
       console.log(error);
+      return error as AxiosError;
     }
   };
 

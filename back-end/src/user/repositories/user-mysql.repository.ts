@@ -17,7 +17,7 @@ export class UserMySqlRepository implements UserRepository {
     const userExists = await this.findByEmail(userData.email);
 
     if (userExists) {
-      throw new ConflictException('User already exists');
+      throw new ConflictException('Este usuário já existe');
     }
 
     const data = {

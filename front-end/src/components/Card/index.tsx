@@ -1,4 +1,4 @@
-import { PencilIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline';
 import React, { useContext } from 'react';
 import { TodoContext } from '../../context/TodoContext';
 import { convertDate } from '../../shared/date-fromated';
@@ -35,7 +35,7 @@ const Card: React.FC<CardProps> = ({ card, onDragStart }) => {
     setTaskIdDelete(id);
   };
 
-  const handleEditTask = async ({ title, description, status, id }: DataTasks) => {
+  const handleEditTask = ({ title, description, status, id }: DataTasks) => {
     setIsCreate(false);
     setInputDataTask({
       ...inputDataTask,
