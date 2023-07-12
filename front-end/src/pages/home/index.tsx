@@ -25,7 +25,6 @@ export const getServerSideProps = withAuth(
         Authorization: `Bearer ${cookies.access_token}`,
       },
     });
-    console.log(data);
 
     return {
       props: { data },
