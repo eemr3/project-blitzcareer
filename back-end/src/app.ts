@@ -18,9 +18,10 @@ class App {
   }
 
   private routes() {
-    this.httpServer.get('/', (req: any, res: any) => {
+    this.httpServer.get('/', (_req: any, res: any) => {
       res.send('Hello World');
     });
+
     this.httpServer.use(this.authRoutes.routes);
     this.httpServer.use(this.userRoutes.routes);
     this.httpServer.use(this.taskRoutes.routes);

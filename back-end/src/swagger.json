@@ -446,7 +446,7 @@
           },
           "password": {
             "type": "string",
-            "example": "123456"
+            "example": "Abc1234@"
           }
         }
       },
@@ -484,7 +484,7 @@
           },
           "message": {
             "type": "string",
-            "example": "User already exists"
+            "example": "Este usuário já existe"
           },
           "error": {
             "type": "string",
@@ -502,10 +502,6 @@
           "description": {
             "type": "string",
             "example": "Task description"
-          },
-          "status": {
-            "type": "string",
-            "example": "pending"
           }
         }
       },

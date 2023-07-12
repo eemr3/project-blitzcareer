@@ -1,24 +1,24 @@
-
 # Front-end da aplicação
 
 Aplicação web que consome um API que cadastra usuário, realiza login e cadastra tarefas do dia.
 
-
 ## Demonstração
 
-![React-App](https://user-images.githubusercontent.com/42968718/177237281-1c244de0-42f2-487e-9f0d-fd4d7ed0af9c.gif)
-
+![React-App](https://user-images.githubusercontent.com/42968718/252788446-55d3b7a9-e695-46fc-bb9e-32d6dff4b124.png)
 
 ## Requisitos
+
 - NodeJs v14 ou superior
+
 ## Tecnologias usadas
 
-- ReactJs
-- Axios
-- Bootstrap
-- RTL (React Testing Library)
-- React Router Dom
-- Eslint
+- NextJs
+- typescript
+- axios
+- tailwindcss
+- cookie
+- formik
+- yup
 
 ## Funcionalidades
 
@@ -29,7 +29,6 @@ Aplicação web que consome um API que cadastra usuário, realiza login e cadast
 - Apagar tarefas
 - Ordenar tarefas por: Titulo / Data de criação / Status
 
-
 ## Rodando localmente
 
 Entre no diretório do projeto
@@ -37,28 +36,16 @@ Entre no diretório do projeto
 ```bash
   cd front-end
 ```
+
 Inicie o App
 
 Observação: O App roda na porta `localhost:3000`
 
 ```bash
-  npm start
+  npm run dev
 ```
+
 Observação: A API precisa estar rodando para que o front-end possa funcionar corretamente.
-
-## Rodando os testes
-
-Para rodar o test, rode o seguinte comando
-
-```bash
-  npm test
-```
-
-Para rodar o teste de cobertura, rode o seguinte comando
-
-```bash
-  npm run test:coverage
-```
 
 ## Autor
 

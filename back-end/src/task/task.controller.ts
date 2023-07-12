@@ -16,8 +16,9 @@ export class TaskController {
     return res.status(201).json(task);
   }
 
-  async findAllTask(req: Request, res: Response) {
-    const tasks = await this.taskService.findAllTask();
+  async findAllTask(req: RequestWithUser, res: Response) {
+    const sub = req.user?.sub;
+    const tasks = await this.taskService.findAllTask(Number(sub));
     return res.status(200).json(tasks);
   }
 

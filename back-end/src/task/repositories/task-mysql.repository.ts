@@ -11,14 +11,17 @@ export class TaskMySqlRepository implements TaskRepository {
     return await this.prismaService.todo.create({ data: taks });
   }
 
-  async findAllTask(): Promise<TaskGetResponse[]> {
-    return (await this.prismaService.todo.findMany({ include: { User: true } })).map(
-      (task) => this.serialize.dbToResponseGet(task),
-    );
+  async findAllTask(id: number): Promise<TaskGetResponse[]> {
+    return (
+      await this.prismaService.todo.findMany({
+        where: { userId: id },
+        include: { User: true },
+      })
+    ).map((task) => this.serialize.dbToResponseGet(task));
   }
 
   async findOneTask(id: number): Promise<TaskGetResponse> {
-    const task = await this.prismaService.todo.findUnique({
+    const task = await this.prismaService.todo.findFirst({
       where: { id },
       include: { User: true },
     });
