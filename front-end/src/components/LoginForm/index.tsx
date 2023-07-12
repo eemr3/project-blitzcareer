@@ -1,13 +1,14 @@
 import { Formik } from 'formik';
 import Link from 'next/link';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { loginSchema } from './login.schema';
 import InputText from '../Form/InputText';
+import { toast } from 'react-toastify';
 
 export function LoginForm() {
   const { sigIn } = useContext(AuthContext);
-
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -17,8 +18,20 @@ export function LoginForm() {
         <Formik
           initialValues={{ email: '', password: '' }}
           validationSchema={loginSchema}
-          onSubmit={(values) => {
-            sigIn(values);
+          onSubmit={async (values) => {
+            const loginRes = await sigIn(values);
+            if (loginRes?.response?.status === 401) {
+              toast.error('Usuário ou senha inválidos', {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+              });
+            }
           }}
         >
           {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
@@ -31,6 +44,7 @@ export function LoginForm() {
                   name="email"
                   id="email"
                   placeholder="email@email.com"
+                  isPassword={false}
                 />
                 {touched && errors.email && (
                   <span className="text-orange-600 text-xs">{errors?.email}</span>
@@ -44,12 +58,15 @@ export function LoginForm() {
                   name="password"
                   id="password"
                   placeholder="••••••••"
+                  isPassword
+                  showPassword={showPassword}
+                  setShowPassword={setShowPassword}
                 />
                 {touched && errors.password && (
                   <span className="text-orange-600 text-xs">{errors?.password}</span>
                 )}
               </div>
-              <div className="flex items-center justify-between">
+              {/* <div className="flex items-center justify-between">
                 <div className="flex items-start">
                   <div className="flex items-center h-5">
                     <input
@@ -74,7 +91,7 @@ export function LoginForm() {
                 >
                   Esqueceu sua senha?
                 </a>
-              </div>
+              </div> */}
               <button
                 type="submit"
                 className="w-full text-white bg-primary-600 hover:bg-primary-700 

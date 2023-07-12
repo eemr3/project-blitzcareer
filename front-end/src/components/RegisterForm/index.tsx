@@ -1,13 +1,15 @@
 import { Formik } from 'formik';
 import Link from 'next/link';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import InputText from '../Form/InputText';
 import { TodoContext } from '../../context/TodoContext';
 import { useRouter } from 'next/router';
 import { registerSchema } from './register.schema';
+import { toast } from 'react-toastify';
 
 export function RegisterForm() {
   const { createAccount } = useContext(TodoContext);
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   return (
     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -18,13 +20,26 @@ export function RegisterForm() {
         <Formik
           initialValues={{ name: '', email: '', password: '', confirmPassword: '' }}
           validationSchema={registerSchema}
-          onSubmit={(values, { resetForm }) => {
-            createAccount({
+          onSubmit={async (values, { resetForm }) => {
+            const registerRes = await createAccount({
               name: values.name,
               email: values.email,
               password: values.password,
             });
+            if (registerRes?.response?.status !== 201) {
+              return toast.error(registerRes?.response?.data?.message, {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+              });
+            }
             resetForm();
+
             router.push('/login');
           }}
         >
@@ -39,9 +54,10 @@ export function RegisterForm() {
                   name="name"
                   id="name"
                   placeholder="Nome completo"
+                  isPassword={false}
                 />
                 {touched && errors.name && (
-                  <span className="text-orange-600 text-xs">{errors?.name}</span>
+                  <span className="text-orange-600 text-sm">{errors?.name}</span>
                 )}
               </div>
               <div>
@@ -53,9 +69,10 @@ export function RegisterForm() {
                   name="email"
                   id="email"
                   placeholder="Email"
+                  isPassword={false}
                 />
                 {touched && errors.email && (
-                  <span className="text-orange-600 text-xs">{errors?.email}</span>
+                  <span className="text-orange-600 text-sm">{errors?.email}</span>
                 )}
               </div>
               <div>
@@ -63,27 +80,20 @@ export function RegisterForm() {
                   label="Sua Senha"
                   value={values.password}
                   onChange={handleChange}
-                  type="password"
+                  type={`${showPassword ? 'text' : 'password'}`}
                   name="password"
                   id="password"
                   placeholder="Senha"
+                  showPassword={showPassword}
+                  setShowPassword={setShowPassword}
+                  isPassword={true}
                 />
+
                 {touched && errors.password && (
-                  <span className="text-orange-600 text-xs">{errors?.password}</span>
+                  <span className="text-orange-600 text-sm">{errors?.password}</span>
                 )}
               </div>
-              {/* <div>
-                <InputText
-                  label="Confirmar sua Senha"
-                  value={values.confirmPassword}
-                  onChange={handleChange}
-                  type="password"
-                  name="confirmPassword"
-                  id="confirmPassword"
-                  placeholder="Confirmar Senha"
-                />              
-              </div> */}
-              <div className="flex items-start">
+              {/* <div className="flex items-start">
                 <div className="flex items-center h-5">
                   <input
                     id="terms"
@@ -106,7 +116,7 @@ export function RegisterForm() {
                     </a>
                   </label>
                 </div>
-              </div>
+              </div> */}
               <button
                 type="submit"
                 className="w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
