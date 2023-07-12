@@ -4,6 +4,8 @@ Aplicação pra controlar tarefas do dia, onde podera adicionar, editar e remove
 
 Esta versão foi criada em javascript tando o front-end como o back-end (ReactJs e NodeJs)
 
+A versão nova com typescript esta na branch main
+
 ## Requisitos
 
 Requisitos minimo para rodar o back-end da aplicação:
