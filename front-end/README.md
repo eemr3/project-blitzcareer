@@ -4,7 +4,7 @@ Aplicação web que consome um API que cadastra usuário, realiza login e cadast
 
 ## Demonstração
 
-![React-App](https://user-images.githubusercontent.com/42968718/252788446-55d3b7a9-e695-46fc-bb9e-32d6dff4b124.png)
+![React-App](https://user-images.githubusercontent.com/42968718/253021876-2cd0e92c-8ff6-434a-a8e9-e0343a18116d.png)
 
 ## Requisitos
 
