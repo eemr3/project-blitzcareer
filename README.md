@@ -53,7 +53,7 @@ Entre napasta `back-end` e crie um arquivo `.env`, adicione as variavei de ambie
 
 `MYSQL_USERNAME`=root
 
-`MYSQL_PWD`=123456
+`MYSQL_PWD`=12345678
 
 `MYSQL_HOST`=localhost
 
