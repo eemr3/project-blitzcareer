@@ -19,7 +19,7 @@ Exemplro de um container myslq na versão 8
 Use esse comando no termina
 
 ```bash
-docker run -p 3306:3306 --name mysql_80 -e MYSQL_ROOT_PASSWORD=seupassword -d mysql:8 mysqld --default-authentication-plugin=mysql_native_password
+docker run --name mysql-80 -e MYSQL_ROOT_PASSWORD=12345678 -d -p 3306:3306 mysql:8
 ```
 
 ## Rodando localmente
