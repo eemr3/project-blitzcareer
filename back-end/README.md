@@ -2,7 +2,6 @@
 
 Back end responsável por gerência os end-points da api.
 
-
 ## Requisitos
 
 Requisitos minimo para rodar o back-end da aplicação:
@@ -10,17 +9,16 @@ Requisitos minimo para rodar o back-end da aplicação:
 - NodeJs v14 ou superior
 
 ## Tecnologias usadas
-- NodeJs
-- Express
-- Dotenv
-- Jsonwbtoken
-- Bcryptjs
-- Jest
-- Mysql2
-- Sequelize
-- Nodemon
-- Supertest
-- Eslint
+
+- nodeJs
+- typescript
+- express
+- dotenv
+- jsonwbtoken
+- bcrypt
+- prisma
+- nodemon
+- ts-node
 
 ## Funcionalidades
 
@@ -45,27 +43,13 @@ Inicie o servidor
   npm run dev
 ```
 
-## Rodando os testes
-
-Na pasta `back-end` rode o seguinte comando:
-
-Test da api
-
-```bash
-  npm run test
-```
-
-Test de cobertura da api
-
-```bash
-  npm run test-coverage  
-```
-
-
 ## Documentação da API
 
-Link para documentação da [API](https://documenter.getpostman.com/view/9196209/UzJFxKXC)
+A aplicação back-end (API) deve esta rodando
 
+```bash
+http://localhost:3001/docs
+```
 
 ## Autor
 

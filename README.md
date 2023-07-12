@@ -7,16 +7,17 @@ Aplicação pra controlar tarefas do dia, onde podera adicionar, editar e remove
 Requisitos minimo para rodar o back-end da aplicação:
 
 - NodeJs v14 ou superior
-- MySQL v5.7 ou superior
+- MySQL
 - Docoker (opcional)
 
 Observação: Se tiver o docker instalado e não tiver o mysql, basta cria um container com o mysql.
 
 Exemplro de um container myslq na versão 8
 
-Use esse comando no termina
+Use esse comando no terminal
+
 ```bash
-docker run -p 3306:3306 --name mysql_80 -e MYSQL_ROOT_PASSWORD=seupassword -d mysql:8 mysqld --default-authentication-plugin=mysql_native_password
+docker run --name mysql-80 -e MYSQL_ROOT_PASSWORD=12345678 -d -p 3306:3306 mysql:8
 
 ```
 
@@ -47,13 +48,13 @@ Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de
 Entre napasta `back-end` e crie um arquivo `.env`, adicione as variavei de ambiente listadas abaixo
 (Os valor que está após o variável é um exemplo, você terá que por os valore correspondente as suas configuraçãoes)
 
-`MYSQL_USERNAME`=root
+`DATABASE_URL`="mysql://root:12345678@localhost:3306/todo_db?schema=public"
 
-`MYSQL_PWD`=123456
+`API_PORT`=3001
 
-`MYSQL_HOST`=localhost
+`JWT_SECRET`="uma string para ser usada como chave secreta para o JWT"
 
-`API_PORT`=3003
+`JWT_EXPIRES_IN`=3600
 
 ## Crie o banco de dados
 
@@ -61,8 +62,18 @@ Dentro da pasta `back-end` rode o comando:
 
 ```bash
 npm run database
-``` 
-O banco de dados é criado com as tabelas `Users` e `ToDos` e é populado com algumas informaçoes iniciais.
+```
+
+```bash
+npm run dev:seed
+```
+
+O banco de dados é criado com as tabelas `users` e `todos` e é populado com algumas informaçoes iniciais.
+Existe um usuário:
+
+- nome: John Doe
+- email: `john.doe@email.com`
+- senha: `Abc12@34`
 
 ## Documentação
 
@@ -83,4 +94,5 @@ O banco de dados é criado com as tabelas `Users` e `ToDos` e é populado com al
 ```bash
   cd back-end
 ```
+
 - [Back-End](https://github.com/eemr3/project-blitzcareer/tree/main/back-end)
