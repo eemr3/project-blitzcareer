@@ -2,6 +2,8 @@
 
 Aplicação pra controlar tarefas do dia, onde podera adicionar, editar e remover as tarefas.
 
+Esta versão foi criada em javascript tando o front-end como o back-end (ReactJs e NodeJs)
+
 ## Requisitos
 
 Requisitos minimo para rodar o back-end da aplicação:
@@ -15,9 +17,9 @@ Observação: Se tiver o docker instalado e não tiver o mysql, basta cria um co
 Exemplro de um container myslq na versão 8
 
 Use esse comando no termina
+
 ```bash
 docker run -p 3306:3306 --name mysql_80 -e MYSQL_ROOT_PASSWORD=seupassword -d mysql:8 mysqld --default-authentication-plugin=mysql_native_password
-
 ```
 
 ## Rodando localmente
@@ -61,7 +63,8 @@ Dentro da pasta `back-end` rode o comando:
 
 ```bash
 npm run database
-``` 
+```
+
 O banco de dados é criado com as tabelas `Users` e `ToDos` e é populado com algumas informaçoes iniciais.
 
 ## Documentação
@@ -83,4 +86,5 @@ O banco de dados é criado com as tabelas `Users` e `ToDos` e é populado com al
 ```bash
   cd back-end
 ```
+
 - [Back-End](https://github.com/eemr3/project-blitzcareer/tree/main/back-end)
