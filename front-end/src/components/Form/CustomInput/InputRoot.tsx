@@ -1,35 +1,11 @@
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
-import { InputHTMLAttributes, useState } from 'react';
-
-interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
-  value: string;
-  type: string;
-  name: string;
-  id: string;
-  placeholder: string;
-  className?: string;
-  label?: string;
-  isPassword?: boolean;
-  showPassword?: boolean;
-  setShowPassword?: (value: boolean) => void;
+interface InputRootProps {
+  children: React.ReactNode;
 }
-
-export default function InputText({
-  value,
-  type,
-  name,
-  id,
-  placeholder,
-  className,
-  label,
-  isPassword,
-  showPassword,
-  setShowPassword,
-  ...rest
-}: InputTextProps) {
+export function InputRoot({ children }: InputRootProps) {
   return (
     <div>
-      <label
+      {children}
+      {/* <label
         htmlFor={id}
         className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white ${className}`}
       >
@@ -71,7 +47,7 @@ export default function InputText({
             onClick={() => setShowPassword && setShowPassword(!showPassword)}
           />
         )}
-      </div>
+      </div> */}
     </div>
   );
 }
