@@ -3,8 +3,10 @@ import Link from 'next/link';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { loginSchema } from './login.schema';
-import InputText from '../Form/InputText';
+// import InputText from '../Form/CustomInput/InputRoot';
 import { toast } from 'react-toastify';
+import { Input } from '../Form/CustomInput';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
 export function LoginForm() {
   const { sigIn } = useContext(AuthContext);
@@ -37,31 +39,47 @@ export function LoginForm() {
           {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
             <form noValidate className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <div>
-                <InputText
-                  value={values.email}
-                  onChange={handleChange}
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="email@email.com"
-                  isPassword={false}
-                />
+                <Input.Root>
+                  <Input.Label text="Email" htmlFor="email" />
+                  <Input.CustomInput
+                    value={values.email}
+                    onChange={handleChange}
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="email@email.com"
+                  />
+                </Input.Root>
                 {touched && errors.email && (
                   <span className="text-orange-600 text-xs">{errors?.email}</span>
                 )}
               </div>
               <div>
-                <InputText
-                  value={values.password}
-                  onChange={handleChange}
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="••••••••"
-                  isPassword
-                  showPassword={showPassword}
-                  setShowPassword={setShowPassword}
-                />
+                <Input.Root>
+                  <Input.Label text="Senha" htmlFor="password" />
+                  <Input.Password>
+                    <Input.CustomInput
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder="********"
+                      id="pasword"
+                      name="password"
+                      value={values.password}
+                      onChange={handleChange}
+                    />
+                    {showPassword ? (
+                      <EyeSlashIcon
+                        className="h-6 w-6 absolute z-20 mr-2 cursor-pointer text-gray-100"
+                        onClick={() => setShowPassword && setShowPassword(!showPassword)}
+                      />
+                    ) : (
+                      <EyeIcon
+                        className="h-6 w-6 absolute z-20 mr-2 cursor-pointer text-gray-100"
+                        onClick={() => setShowPassword && setShowPassword(!showPassword)}
+                      />
+                    )}
+                  </Input.Password>
+                </Input.Root>
+
                 {touched && errors.password && (
                   <span className="text-orange-600 text-xs">{errors?.password}</span>
                 )}

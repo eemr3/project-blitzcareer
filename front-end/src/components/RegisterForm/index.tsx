@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import Link from 'next/link';
 import React, { useContext, useState } from 'react';
-import InputText from '../Form/InputText';
+import InputText from '../Form/CustomInput/InputRoot';
 import { TodoContext } from '../../context/TodoContext';
 import { useRouter } from 'next/router';
 import { registerSchema } from './register.schema';

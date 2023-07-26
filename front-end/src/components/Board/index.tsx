@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from 'react';
 import { http } from '../../service/api';
 import Column from '../Column';
-import InputText from '../Form/InputText';
+// import InputText from '../Form/CustomInput/InputRoot';
 import { DataTasks } from '../../shared/interface/data-tasks';
 import { TodoContext } from '../../context/TodoContext';
 import { useFormik } from 'formik';
 import { boardSchema } from './board.schema';
 import { ArrowPathIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Input } from '../Form/CustomInput';
 
 export interface BoardProps {
   data: DataTasks[];
@@ -97,38 +98,44 @@ const Board: React.FC<BoardProps> = ({ data }) => {
         onSubmit={formik.handleSubmit}
         className="mx-auto container flex items-center justify-center gap-x-4"
       >
-        <div className="flex gap-x-4 h-[74px]">
-          <div>
-            <InputText
-              className="w-[300px]"
-              id="title"
-              name="title"
-              type="text"
-              placeholder="Titulo"
-              value={formik.values.title}
-              onChange={formik.handleChange}
-            />
+        <div className="flex gap-x-4 h-[74px] w-[900px]">
+          <div className="w-full">
+            <Input.Root>
+              <Input.Label text="Titulo" htmlFor="title" />
+              <Input.CustomInput
+                className="w-[300px]"
+                id="title"
+                name="title"
+                type="text"
+                placeholder="Titulo"
+                value={formik.values.title}
+                onChange={formik.handleChange}
+              />
+            </Input.Root>
             {formik.errors.title && formik.touched.title && (
               <span className="text-orange-600 text-xs">{formik.errors.title}</span>
             )}
           </div>
-          <div>
-            <InputText
-              className="w-[530px]"
-              name="description"
-              id="description"
-              type="text"
-              placeholder="Descrição"
-              value={formik.values.description}
-              onChange={formik.handleChange}
-            />
+          <div className="w-full">
+            <Input.Root>
+              <Input.Label text="Descrição" htmlFor="description" />
+              <Input.CustomInput
+                className="w-[530px]"
+                name="description"
+                id="description"
+                type="text"
+                placeholder="Descrição"
+                value={formik.values.description}
+                onChange={formik.handleChange}
+              />
+            </Input.Root>
             {formik.errors.description && formik.touched.description && (
               <span className="text-orange-600 text-xs">{formik.errors.description}</span>
             )}
           </div>
         </div>
 
-        <div className={`flex h-[74px] pt-2 ${!isCreate ? 'gap-x-3' : ''}`}>
+        <div className={`flex items-end h-[60px] ${!isCreate ? 'gap-x-3' : ''}`}>
           <button
             type="submit"
             className={`inline-flex items-center justify-center w-10 h-10 mr-2 text-indigo-100 
