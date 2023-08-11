@@ -1,6 +1,6 @@
 # ToDo List
 
-Aplicação pra controlar tarefas do dia, onde podera adicionar, editar e remover as tarefas.
+Aplicação para controlar tarefas do dia, onde poderá adicionar, editar e remover as tarefas. Projeto realizado para um desafio técnico proposto pela equipe de carreira da Trybe, durante o tempo em que realizei o curso de desenvolvimento web.
 
 - A aplicação foi toda refeita utilizando typescript tando no front-end quanto no back-end (NextJs e NodeJs)
 
