@@ -1,24 +1,25 @@
 import React from 'react';
-import { randomColor } from '../../shared/random-color';
 
 interface LetterAvatarProps {
   name: string;
 }
-export const LetterAvatar = ({ name }: LetterAvatarProps) => {
-  // const initials = name
-  //   .split(' ')
-  //   .map((word: string) => word.charAt(0))
-  //   .join('');
 
+const getInitials = (name: string) => {
+  const [firstName, lastName] = name.split(' ');
+  if (firstName && lastName) {
+    return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+  }
+
+  return firstName.charAt(0).toUpperCase();
+};
+
+export const LetterAvatar = ({ name }: LetterAvatarProps) => {
   return (
     <div
       className="flex justify-center items-center w-12 h-12 rounded-full 
       text-white font-bold text-xl uppercase"
     >
-      {name
-        .split(' ')
-        .map((word: string) => word.charAt(0))
-        .join('')}
+      {getInitials(name)}
     </div>
   );
 };

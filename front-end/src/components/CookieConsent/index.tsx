@@ -28,7 +28,7 @@ const CookieConsent = () => {
   }
 
   return (
-    <section className="fixed bottom-0 left-0 w-full py-2 md:py-4">
+    <section className="fixed bottom-0 left-0 w-full py-2 md:py-4 z-50">
       <div
         className="flex flex-col items-start px-5 py-3 space-y-2 bg-gray-200 
         md:flex-row md:space-y-0 md:items-stretch md:space-x-2"
