@@ -1,11 +1,13 @@
 import { Formik } from 'formik';
 import Link from 'next/link';
 import React, { useContext, useState } from 'react';
-import InputText from '../Form/CustomInput/InputRoot';
+
 import { TodoContext } from '../../context/TodoContext';
 import { useRouter } from 'next/router';
 import { registerSchema } from './register.schema';
 import { toast } from 'react-toastify';
+import { Input } from '../Form/CustomInput';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
 export function RegisterForm() {
   const { createAccount } = useContext(TodoContext);
@@ -26,6 +28,12 @@ export function RegisterForm() {
               email: values.email,
               password: values.password,
             });
+
+            if (registerRes?.status === 201) {
+              resetForm();
+              router.push('/login');
+            }
+
             if (registerRes?.response?.status !== 201) {
               return toast.error(registerRes?.response?.data?.message, {
                 position: 'top-right',
@@ -38,57 +46,67 @@ export function RegisterForm() {
                 theme: 'light',
               });
             }
-            resetForm();
-
-            router.push('/login');
           }}
         >
           {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6" action="#">
               <div>
-                <InputText
-                  label="Seu Nome"
-                  value={values.name}
-                  onChange={handleChange}
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Nome completo"
-                  isPassword={false}
-                />
+                <Input.Root>
+                  <Input.Label text="Nome" htmlFor="name" />
+                  <Input.CustomInput
+                    value={values.name}
+                    onChange={handleChange}
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Nome completo"
+                  />
+                </Input.Root>
                 {touched && errors.name && (
                   <span className="text-orange-600 text-sm">{errors?.name}</span>
                 )}
               </div>
               <div>
-                <InputText
-                  label="Seu Email"
-                  value={values.email}
-                  onChange={handleChange}
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="Email"
-                  isPassword={false}
-                />
+                <Input.Root>
+                  <Input.Label text="Email" htmlFor="email" />
+                  <Input.CustomInput
+                    value={values.email}
+                    onChange={handleChange}
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                  />
+                </Input.Root>
                 {touched && errors.email && (
                   <span className="text-orange-600 text-sm">{errors?.email}</span>
                 )}
               </div>
               <div>
-                <InputText
-                  label="Sua Senha"
-                  value={values.password}
-                  onChange={handleChange}
-                  type={`${showPassword ? 'text' : 'password'}`}
-                  name="password"
-                  id="password"
-                  placeholder="Senha"
-                  showPassword={showPassword}
-                  setShowPassword={setShowPassword}
-                  isPassword={true}
-                />
-
+                <Input.Root>
+                  <Input.Label text="Senha" htmlFor="password" />
+                  <Input.Password>
+                    <Input.CustomInput
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder="********"
+                      id="pasword"
+                      name="password"
+                      value={values.password}
+                      onChange={handleChange}
+                    />
+                    {showPassword ? (
+                      <EyeSlashIcon
+                        className="h-6 w-6 absolute z-20 mr-2 cursor-pointer text-gray-100"
+                        onClick={() => setShowPassword && setShowPassword(!showPassword)}
+                      />
+                    ) : (
+                      <EyeIcon
+                        className="h-6 w-6 absolute z-20 mr-2 cursor-pointer text-gray-100"
+                        onClick={() => setShowPassword && setShowPassword(!showPassword)}
+                      />
+                    )}
+                  </Input.Password>
+                </Input.Root>
                 {touched && errors.password && (
                   <span className="text-orange-600 text-sm">{errors?.password}</span>
                 )}

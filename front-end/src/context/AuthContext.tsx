@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
-import { createContext, useState } from 'react';
+import { AxiosError } from 'axios';
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
+import { createContext } from 'react';
 import { http } from '../service/api';
 import { setCookie } from '../shared/cookies';
-import { AxiosError } from 'axios';
 
 interface AuthProviderProps {
   children: React.ReactNode;

@@ -11,7 +11,7 @@ Aplicação para controlar tarefas do dia, onde poderá adicionar, editar e remo
 Requisitos minimo para rodar o back-end da aplicação:
 
 - NodeJs v14 ou superior
-- MySQL
+- Postgres
 - Docoker (opcional)
 
 Observação: Se tiver o docker instalado e não tiver o mysql, basta cria um container com o mysql.
@@ -21,7 +21,7 @@ Exemplro de um container myslq na versão 8
 Use esse comando no terminal
 
 ```bash
-docker run --name mysql-80 -e MYSQL_ROOT_PASSWORD=12345678 -d -p 3306:3306 mysql:8
+docker run --name meu-postgres -e POSTGRES_PASSWORD=12345678 -p 5432:5432 -d postgres:14.4
 
 ```
 
@@ -52,7 +52,7 @@ Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de
 Entre napasta `back-end` e crie um arquivo `.env`, adicione as variavei de ambiente listadas abaixo
 (Os valor que está após o variável é um exemplo, você terá que por os valore correspondente as suas configuraçãoes)
 
-`DATABASE_URL`="mysql://root:12345678@localhost:3306/todo_db?schema=public"
+`DATABASE_URL`="postgresql://postgres:12345678@localhost:5432/todo_db?schema=public"
 
 `API_PORT`=3001
 
