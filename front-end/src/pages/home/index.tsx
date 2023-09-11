@@ -4,6 +4,8 @@ import Page from '../../components/template/Page';
 import { http } from '../../service/api';
 import { DataTasks } from '../../shared/interface/data-tasks';
 import { withAuthServerSideProps } from '../../hoc/withAuth';
+import { use, useContext, useEffect } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 const NoSSR = dynamic(() => import('../../components/NavBar'), { ssr: false });
 
@@ -12,6 +14,11 @@ export interface HomeProps {
 }
 
 function Home(props: HomeProps) {
+  const { setLoading } = useContext(AuthContext);
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
   return (
     <Page>
       <NoSSR />

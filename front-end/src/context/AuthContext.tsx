@@ -35,7 +35,6 @@ export default function AuthProvider({ children }: AuthProviderProps) {
         setCookie('access_token', response.data.access_token);
         setTimeout(() => {
           router.push('/home');
-          setLoading(false);
         }, 3000);
       }
       return response.data;
