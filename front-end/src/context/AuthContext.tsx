@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 import { http } from '../service/api';
 import { setCookie } from '../shared/cookies';
 
@@ -17,20 +17,26 @@ interface DataLogin {
 interface AuthContextProps {
   sigIn: (data: DataLogin) => Promise<any>;
   signout: () => void;
+  loading?: boolean;
+  setLoading: (value: boolean) => void;
 }
 
 export const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 
 export default function AuthProvider({ children }: AuthProviderProps) {
   const router = useRouter();
-
+  const [loading, setLoading] = useState(false);
   const sigIn = async (data: DataLogin) => {
     try {
+      setLoading(true);
       const response = await http.post('/login', data);
 
       if (response.status === 200) {
         setCookie('access_token', response.data.access_token);
-        router.push('/home');
+        setTimeout(() => {
+          router.push('/home');
+          setLoading(false);
+        }, 3000);
       }
       return response.data;
     } catch (error) {
@@ -49,6 +55,8 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       value={{
         sigIn,
         signout,
+        loading,
+        setLoading,
       }}
     >
       {children}
