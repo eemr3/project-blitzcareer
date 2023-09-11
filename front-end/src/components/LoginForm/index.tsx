@@ -83,12 +83,12 @@ export function LoginForm() {
                     />
                     {showPassword ? (
                       <EyeSlashIcon
-                        className="h-6 w-6 absolute z-20 mr-2 cursor-pointer text-gray-100"
+                        className="h-6 w-6 absolute z-20 mr-2 cursor-pointer text-gray-800 dark:text-gray-100"
                         onClick={() => setShowPassword && setShowPassword(!showPassword)}
                       />
                     ) : (
                       <EyeIcon
-                        className="h-6 w-6 absolute z-20 mr-2 cursor-pointer text-gray-100"
+                        className="h-6 w-6 absolute z-20 mr-2 cursor-pointer dark:text-gray-100 text-gray-800"
                         onClick={() => setShowPassword && setShowPassword(!showPassword)}
                       />
                     )}
@@ -136,7 +136,7 @@ export function LoginForm() {
               >
                 {loading ? <Loading /> : 'Entrar'}
               </button>
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+              <p className="text-sm font-light text-gray-700 dark:text-gray-400">
                 Não tem uma conta ainda?{' '}
                 <Link
                   href="/register-account"
