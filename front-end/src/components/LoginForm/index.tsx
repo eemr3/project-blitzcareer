@@ -4,12 +4,13 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { loginSchema } from './login.schema';
 // import InputText from '../Form/CustomInput/InputRoot';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-toastify';
 import { Input } from '../Form/CustomInput';
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import Loading from '../Loading';
 
 export function LoginForm() {
-  const { sigIn } = useContext(AuthContext);
+  const { sigIn, loading, setLoading } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   return (
     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -22,8 +23,22 @@ export function LoginForm() {
           validationSchema={loginSchema}
           onSubmit={async (values) => {
             const loginRes = await sigIn(values);
+
+            if (loginRes?.statusCode === 200) {
+              return toast.success('Login realizado com sucesso', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+              });
+            }
             if (loginRes?.response?.status === 401) {
-              toast.error('Usuário ou senha inválidos', {
+              setLoading(false);
+              return toast.error('Usuário ou senha inválidos', {
                 position: 'top-right',
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -114,9 +129,12 @@ export function LoginForm() {
                 type="submit"
                 className="w-full text-white bg-primary-600 hover:bg-primary-700 
                   focus:ring-4 focus:outline-none 
-                    focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
+                  dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800
+                  :disabled:bg-gray-400 dark:disabled:bg-gray-600"
+                disabled={loading}
               >
-                Entrar
+                {loading ? <Loading /> : 'Entrar'}
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Não tem uma conta ainda?{' '}
