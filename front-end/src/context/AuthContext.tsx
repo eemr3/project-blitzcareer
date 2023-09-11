@@ -27,8 +27,11 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   const sigIn = async (data: DataLogin) => {
     try {
       const response = await http.post('/login', data);
-      setCookie('access_token', response.data.access_token);
-      router.push('/home');
+      console.log(response);
+      if (response.status === 200) {
+        setCookie('access_token', response.data.access_token);
+        router.push('/home');
+      }
       return response.data;
     } catch (error) {
       console.log(error);
